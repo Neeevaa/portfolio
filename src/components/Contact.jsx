@@ -7,6 +7,16 @@ function Contact() {
         <h2 className="text-4xl font-bold mb-8">GET IN TOUCH</h2>
         <p className="text-xl text-gray-300 mb-12">Feel free to reach out for collaboration or just to say hello!</p>
         
+        <div className="flex flex-col items-center md:flex-row justify-center gap-8 mb-8">
+          <a
+            href={resumeData.personal.resumeUrl || '/resume.pdf'}
+            download
+            className="inline-block bg-blue-500 hover:bg-blue-600 text-white font-semibold px-6 py-3 rounded-md shadow"
+          >
+            ⬇️ Download Resume
+          </a>
+        </div>
+
         <div className="flex flex-col md:flex-row justify-center gap-8">
           <div>
             <h3 className="text-lg font-semibold mb-2">Email</h3>

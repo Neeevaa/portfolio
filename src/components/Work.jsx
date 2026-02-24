@@ -46,10 +46,7 @@ function Work() {
           </div>
         </div>
 
-        <div className="mt-16 bg-blue-50 p-8 rounded-lg border-l-4 border-blue-500">
-          <h3 className="text-2xl font-bold text-slate-900 mb-4">DECLARATION</h3>
-          <p className="text-gray-700">{resumeData.declaration}</p>
-        </div>
+        
       </div>
     </section>
   );

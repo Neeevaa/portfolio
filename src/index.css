@@ -71,6 +71,24 @@ textarea {
   50% { box-shadow: 0 0 20px var(--accent-neon); }
 }
 
+@keyframes map-pin-pulse {
+  0%, 100% {
+    filter: drop-shadow(0 0 8px rgba(217, 70, 239, 0.55));
+    opacity: 0.92;
+    transform: translate(-50%, -55%) scale(1);
+  }
+  50% {
+    filter: drop-shadow(0 0 18px rgba(217, 70, 239, 0.95));
+    opacity: 1;
+    transform: translate(-50%, -56%) scale(1.06);
+  }
+}
+
+@keyframes kerala-stroke-pulse {
+  0%, 100% { stroke-opacity: 0.82; }
+  50% { stroke-opacity: 1; }
+}
+
 /* Accessibility helpers */
 .skip-link {
   position: absolute;
@@ -451,25 +469,77 @@ textarea {
 .model-orb {
   width: min(300px, 72vw);
   aspect-ratio: 1/1;
-  border-radius: 999px;
-  background:
-    radial-gradient(circle at 35% 28%, rgba(255,255,255,0.24), transparent 45%),
-    radial-gradient(circle at 70% 75%, rgba(217, 70, 239, 0.22), transparent 55%),
-    radial-gradient(circle at 30% 70%, rgba(147, 51, 234, 0.25), transparent 55%),
-    linear-gradient(135deg, rgba(217, 70, 239, 0.18), rgba(147, 51, 234, 0.16));
-  border: 1px solid rgba(255,255,255,0.10);
-  box-shadow: 0 18px 70px rgba(0,0,0,0.45), 0 0 50px rgba(217, 70, 239, 0.18);
+  border-radius: 22px;
   position: relative;
+  overflow: hidden;
+  box-shadow: 0 18px 70px rgba(0, 0, 0, 0.45), 0 0 50px rgba(217, 70, 239, 0.16);
+  transform-style: preserve-3d;
+  will-change: transform;
 }
 
-.model-orb::after {
+.model-orb::before {
   content: "";
   position: absolute;
-  inset: -18px;
-  border-radius: 999px;
-  background: radial-gradient(circle, rgba(217, 70, 239, 0.20), transparent 65%);
-  filter: blur(18px);
-  z-index: -1;
+  inset: -40%;
+  background:
+    radial-gradient(circle at 40% 20%, rgba(217, 70, 239, 0.18), transparent 55%),
+    radial-gradient(circle at 72% 70%, rgba(147, 51, 234, 0.14), transparent 52%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.hero-map-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: grid;
+  place-items: center;
+  z-index: 1;
+  padding: 1.35rem;
+}
+
+.kerala-svg {
+  width: 58%;
+  height: auto;
+  max-height: 78%;
+  color: var(--accent-neon);
+}
+
+.kerala-path {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2.2;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+  filter: drop-shadow(0 0 10px rgba(217, 70, 239, 0.35));
+  animation: kerala-stroke-pulse 3.2s ease-in-out infinite;
+}
+
+.map-pin {
+  position: absolute;
+  left: 52%;
+  top: 44%;
+  color: var(--accent-neon);
+  transform: translate(-50%, -55%);
+  pointer-events: none;
+}
+
+.map-pin-pulse {
+  animation: map-pin-pulse 2.2s ease-in-out infinite;
+}
+
+.hero-map-caption {
+  position: absolute;
+  bottom: 0.85rem;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  font-weight: 600;
+  pointer-events: none;
+  white-space: nowrap;
 }
 
 .orbit-text {
@@ -905,7 +975,9 @@ textarea {
   .wave-emoji,
   .floating-model,
   .orbit-text,
-  .glow-pulse { animation: none !important; }
+  .glow-pulse,
+  .map-pin-pulse,
+  .kerala-path { animation: none !important; }
   * { transition-duration: 0.001ms !important; }
 }
 

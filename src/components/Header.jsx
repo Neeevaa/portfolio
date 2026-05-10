@@ -1,4 +1,5 @@
 import { resumeData } from '../data/resumeData'
+import HeroMapCard from './HeroMapCard'
 
 function Header() {
   return (
@@ -59,7 +60,7 @@ function Header() {
           </svg>
 
           <div className="floating-model">
-            <div className="model-orb" />
+            <HeroMapCard />
           </div>
         </div>
       </div>

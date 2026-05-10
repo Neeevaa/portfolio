@@ -2,15 +2,23 @@ import { resumeData } from '../data/resumeData'
 
 function Navbar() {
   return (
-    <nav className="sticky top-0 z-50 bg-slate-900 text-white shadow-lg">
-      <div className="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
-        <h2 className="text-2xl font-bold text-blue-400">{resumeData.personal.name.split(' ')[0]}</h2>
-        <div className="flex gap-8">
-          <a href="#education" className="hover:text-blue-400 transition font-medium">Education</a>
-          <a href="#experience" className="hover:text-blue-400 transition font-medium">Experience</a>
-          <a href="#projects" className="hover:text-blue-400 transition font-medium">Projects</a>
-          <a href="#contact" className="hover:text-blue-400 transition font-medium">Contact</a>
+    <nav className="navbar" aria-label="Primary">
+      <div className="container nav-inner">
+        <a className="brand" href="#top" aria-label="Go to top">
+          <span className="brand-badge" aria-hidden="true" />
+          <span>{resumeData.personal.name.split(' ')[0]}</span>
+        </a>
+
+        <div className="nav-links" role="navigation" aria-label="Sections">
+          <a className="nav-link" href="#skills">Skills</a>
+          <a className="nav-link" href="#projects">Projects</a>
+          <a className="nav-link" href="#experience">Experience</a>
+          <a className="nav-link" href="#contact">Contact</a>
         </div>
+
+        <a className="btn btn-primary glow-pulse" href="#contact">
+          Contact
+        </a>
       </div>
     </nav>
   );

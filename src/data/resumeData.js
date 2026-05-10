@@ -1,12 +1,14 @@
 export const resumeData = {
   personal: {
     name: "NEEVA SUNISH MATHEW",
-    title: "Cloud & Full-Stack Developer",
+    title: " I'm a final-year MCA student who believes the most dangerous thing in tech isn't a zero-day exploit, it's someone who's genuinely curious and won't stop digging. I started with a Linux terminal and a few basic commands, and realized every line I typed was pulling back a curtain on how systems actually work.\n\n Now I'm channeling 5 years of computer science — networks, operating systems, databases, security — into a career at the intersection of cybersecurity and cloud. I'm not here to watch from the sidelines. I'm here to find what's broken before someone else does. ",
     address: "Chirakkalathu House, Anakkal P.O. Kontyam Dist., Kanjirapppally, Kerala, 686508",
     phone: "+91 9895316120",
     email: "neevaaacodes@gmail.com",
-    linkedin: "https://www.linkedin.com/in/neevasunishmathew",
+    linkedin: "https://www.linkedin.com/in/neevasunishmathew/",
     github: "https://github.com/Neeevaa",
+    leetcode: "https://leetcode.com/u/thumbsoffury/",
+    labex: "https://labex.io/users/neeva-sunish-mathew-70866261",
     resumeUrl: "/resume.pdf",
   },
   education: [
@@ -40,7 +42,6 @@ export const resumeData = {
     "Google Cloud Big Data and Machine Learning Fundamentals (November 2024)",
     "IBM Developer Skills – SQL and Relational Databases (Jul 2024)",
     "CompTIA Network+ (N10-007) Cert Prep: 1 Understanding Networks (June 2024)",
-    "The Complete 2023 Web Development Bootcamp (Apr 2024)",
   ],
   volunteering: [
     {
@@ -86,6 +87,16 @@ export const resumeData = {
       ],
     },
   ],
+  internships: [
+    {
+      company: "Incial",
+      title: "Administrative Intern",
+      duration: "March 2026-Present",
+      responsibilities: [
+        "Handle the administrative tasks of the company.",
+      ],
+    },
+  ],
   projects: [
     {
       name: "'Aromiq'",
@@ -125,9 +136,9 @@ export const resumeData = {
   ],
   skills: {
     languages: ["C/C++", "Python", "Java"],
-    frameworks: ["React", "JavaScript", "PHP", "jQuery", "AJAX"],
-    frontend: ["React.js", "HTML", "CSS", "JavaScript", "Bootstrap"],
-    backend: ["Data Mining", "Git"],
+    frameworks: ["React", "JavaScript", "jQuery", "AJAX"],
+    frontend: [ "HTML", "CSS", "JavaScript"],
+    backend: ["PHP", "MySQL", "Git"],
     tools: ["Network Administration", "Data Structures", "Firebase Studio", "WordPress",  "AWS EC2 Hosting", "Linux CL Commands", "Microsoft Office Suite"],
   }
 };

@@ -2,39 +2,51 @@ import { resumeData } from '../data/resumeData'
 
 function About() {
   return (
-    <section id="education" className="py-16 px-6 bg-white">
-      <div className="max-w-6xl mx-auto">
-        <h2 className="text-4xl font-bold mb-12 text-slate-900">EDUCATION</h2>
-        
-        <div className="space-y-8">
-          {resumeData.education.map((edu, idx) => (
-            <div key={idx} className="border-l-4 border-blue-500 pl-6 py-4">
-              <div className="flex justify-between items-start mb-2">
-                <div>
-                  <h3 className="text-2xl font-bold text-slate-900">{edu.school}</h3>
-                  {edu.college && <p className="text-gray-600">{edu.college}</p>}
-                  {edu.institution && <p className="text-gray-600">{edu.institution}</p>}
+    <section id="education" className="section">
+      <div className="container">
+        <h2 className="section-title">Education</h2>
+        <p className="section-lead">
+          Formal education + certifications that back my cloud and full-stack work.
+        </p>
+
+        <div className="timeline" aria-label="Education timeline">
+          {resumeData.education.map((edu) => (
+            <div className="timeline-item" key={`${edu.school}-${edu.duration}`}>
+              <article className="timeline-card">
+                <div className="timeline-top">
+                  <div>
+                    <h3 className="timeline-role">{edu.school}</h3>
+                    <p className="timeline-org">
+                      {edu.college || edu.institution || ""}
+                    </p>
+                  </div>
+                  <div className="timeline-duration">{edu.duration}</div>
                 </div>
-                <span className="text-gray-500 whitespace-nowrap ml-4">{edu.duration}</span>
-              </div>
-              {edu.degree && <p className="text-gray-700 font-semibold">{edu.degree}</p>}
-              {edu.cgpa && <p className="text-gray-600">CGPA: {edu.cgpa}</p>}
-              {edu.grade && <p className="text-gray-700">{edu.grade}</p>}
-              {edu.percentile && <p className="text-gray-600">{edu.percentile}</p>}
+
+                <ul className="timeline-list">
+                  {edu.degree ? <li>{edu.degree}</li> : null}
+                  {edu.cgpa ? <li>CGPA: {edu.cgpa}</li> : null}
+                  {edu.grade ? <li>{edu.grade}</li> : null}
+                  {edu.percentile ? <li>{edu.percentile}</li> : null}
+                </ul>
+              </article>
             </div>
           ))}
         </div>
 
-        <div className="mt-16">
-          <h3 className="text-2xl font-bold text-slate-900 mb-6">ADDITIONAL CERTIFICATIONS</h3>
-          <ul className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {resumeData.certifications.map((cert, idx) => (
-              <li key={idx} className="flex items-start">
-                <span className="text-blue-500 font-bold mr-3">•</span>
-                <span className="text-gray-700">{cert}</span>
-              </li>
+        <div style={{ marginTop: "2.5rem" }}>
+          <h3 className="section-title" style={{ fontSize: "1.4rem", marginBottom: "1rem" }}>
+            Certifications
+          </h3>
+          <div className="projects-grid" aria-label="Certifications">
+            {resumeData.certifications.map((cert) => (
+              <div key={cert} className="project-card">
+                <div className="project-body">
+                  <div className="project-title">{cert}</div>
+                </div>
+              </div>
             ))}
-          </ul>
+          </div>
         </div>
       </div>
     </section>

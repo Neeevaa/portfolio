@@ -1,23 +1,30 @@
-import Contact from './components/Contact'
-import Footer from './components/Footer'
-import Work from './components/Work'
-import Services from './components/Services'
-import About from './components/About'
-import Header from './components/Header'
-import Navbar from './components/Navbar'
-import LenisScroll from './components/LenisScroll'
+import Navbar from "./components/Navbar";
+import Header from "./components/Header";
+import Skills from "./components/Skills";
+import GithubContributions from "./components/GithubContributions";
+import ExperienceEducation from "./components/ExperienceEducation";
+import Work from "./components/Work";
+import Contact from "./components/Contact";
+import Footer from "./components/Footer";
 
-export default function App() {
-    return (
-        <>
-            <LenisScroll />
-            <Navbar />
-            <Header />
-            <About />
-            <Services />
-            <Work />
-            <Contact />
-            <Footer />
-        </>
-    )
+function App() {
+  return (
+    <>
+      <a className="skip-link" href="#content">
+        Skip to content
+      </a>
+      <Navbar />
+      <main id="content">
+        <Header />
+        <Skills />
+        <Work />
+        <GithubContributions />
+        <ExperienceEducation />
+        <Contact />
+        <Footer />
+      </main>
+    </>
+  );
 }
+
+export default App;

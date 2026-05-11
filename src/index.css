@@ -687,6 +687,14 @@ textarea {
 }
 
 /* GitHub contributions */
+.section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
 .gh-wrap {
   border-radius: 18px;
   padding: 1px;
@@ -695,6 +703,31 @@ textarea {
 .gh-inner {
   padding: 1rem;
   overflow: auto;
+}
+
+.gh-filter {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+  margin-top: 0;
+  flex-wrap: wrap;
+}
+
+.gh-filter label {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 0.95rem;
+  color: var(--text-main);
+}
+
+.gh-filter select {
+  min-width: 7rem;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(0, 0, 0, 0.16);
+  color: var(--text-main);
+  padding: 0.55rem 0.85rem;
 }
 
 .gh-chart {

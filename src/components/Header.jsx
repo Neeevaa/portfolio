@@ -51,9 +51,9 @@ function Header() {
             <defs>
               <path id="orbitPath" d="M110,110 m-84,0 a84,84 0 1,1 168,0 a84,84 0 1,1 -168,0" />
             </defs>
-            <text>
-              <textPath href="#orbitPath" startOffset="0%">
-                Actively exploring roles where I can leverage my skills.
+            <text fontSize="12" fill="#fff">
+              <textPath href="#orbitPath" startOffset="0%" textLength="528" lengthAdjust="spacingAndGlyphs">
+               Open to new Opportunities and Horizons &#x2022; Building Innovative Solutions &#x2022;
               </textPath>
             </text>
           </svg>

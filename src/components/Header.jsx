@@ -1,5 +1,4 @@
 import { resumeData } from '../data/resumeData'
-import HeroMapCard from './HeroMapCard'
 
 function Header() {
   return (
@@ -54,14 +53,11 @@ function Header() {
             </defs>
             <text>
               <textPath href="#orbitPath" startOffset="0%">
-                Actively exploring roles where I can leverage• Seeking my next career chapter with a forward-thinking team.
+                Actively exploring roles where I can leverage my skills.
               </textPath>
             </text>
           </svg>
 
-          <div className="floating-model">
-            <HeroMapCard />
-          </div>
         </div>
       </div>
     </header>

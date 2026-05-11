@@ -45,6 +45,9 @@ function Contact() {
               <a className="meta-pill glass" href={resumeData.personal.linkedin} target="_blank" rel="noopener noreferrer">
                 LinkedIn
               </a>
+              <a className="meta-pill glass" href={resumeData.personal.labex} target="_blank" rel="noopener noreferrer">
+              LabEx
+            </a>
               {resumeData.personal.leetcode ? (
                 <a className="meta-pill glass" href={resumeData.personal.leetcode} target="_blank" rel="noopener noreferrer">
                   LeetCode

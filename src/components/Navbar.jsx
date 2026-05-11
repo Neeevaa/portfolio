@@ -14,11 +14,10 @@ function Navbar() {
           <a className="nav-link" href="#projects">Projects</a>
           <a className="nav-link" href="#experience">Experience</a>
           <a className="nav-link" href="#contact">Contact</a>
-        </div>
-
-        <a className="btn btn-primary glow-pulse" href="#contact">
-          Contact
-        </a>
+        
+        <a className="btn btn-primary" href={resumeData.personal.resumeUrl || "/resume.pdf"} download>
+                Download resume
+              </a> </div>
       </div>
     </nav>
   );

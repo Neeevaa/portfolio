@@ -9,6 +9,7 @@ function Footer() {
           <a href={`mailto:${resumeData.personal.email}`}>Email</a>
           <a href={resumeData.personal.linkedin} target="_blank" rel="noopener noreferrer">LinkedIn</a>
           <a href={resumeData.personal.github} target="_blank" rel="noopener noreferrer">GitHub</a>
+          <a href={resumeData.personal.labex} target="_blank" rel="noopener noreferrer"> LabEx</a>
         </div>
       </div>
     </footer>

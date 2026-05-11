@@ -38,6 +38,9 @@ function Header() {
             <a className="meta-pill glass" href={resumeData.personal.github} target="_blank" rel="noopener noreferrer">
               GitHub
             </a>
+            <a className="meta-pill glass" href={resumeData.personal.labex} target="_blank" rel="noopener noreferrer">
+              LabEx
+            </a>
             {resumeData.personal.leetcode && (
               <a className="meta-pill glass" href={resumeData.personal.leetcode} target="_blank" rel="noopener noreferrer">
                 LeetCode

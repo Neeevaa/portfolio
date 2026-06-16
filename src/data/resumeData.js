@@ -99,9 +99,11 @@ export const resumeData = {
     {
       company: "TechTaliya Informatics (P) Ltd.",
       title: "ML Intern",
-      duration: "June 2026- 1 Month",
+      duration: "June 2026, 1 Month",
       responsibilities: [
-        "Worked on Python, React, ML Models, Deep Learning and Gen AI.",
+        "Worked on Python, React, Languages.",
+        "Learned about AI Domain in Detail.",
+        "Trained ML Models."
       ],
     },
   ],
@@ -111,16 +113,16 @@ export const resumeData = {
       tech: "HTML, CSS, JS, PHP, MySQL, Bootstrap",
       description: "Revolutionary Food Ordering & Management Platform within Restaurants",
     },
-    {
+    /*{
       name: "Car Racing Game",
       tech: "Springboot",
       description: "Simple 2D fun Car Racing Game",
-    },
-    {
+    },*/
+    /*{
       name: "Finding Minimal Spanning Tree",
       tech: "VB.NET",
       description: "Retail Store Location-using Kruskal's Algorithm",
-    },
+    },*/
     {
       name: "Hyred",
       tech: "Made using Firebase Studio, Firebase Cloud Functions, TypeScript",
@@ -146,7 +148,7 @@ export const resumeData = {
     languages: ["C/C++", "Python", "Java"],
     frameworks: ["React", "JavaScript", "jQuery", "AJAX"],
     frontend: ["HTML", "CSS", "JavaScript"],
-    backend: ["PHP", "MySQL", "Git"],
-    tools: ["Network Administration", "Data Structures", "Firebase Studio", "WordPress", "AWS EC2 Hosting", "Linux CL Commands", "Microsoft Office Suite"],
+    backend: ["PHP", "MySQL", "Git", "NodeJS"],
+    tools: ["Network Administration", "Data Structures", "Firebase Studio", "WordPress", "AWS EC2 Hosting", "Linux CL Commands", "Microsoft Office Suite", "Jupyter Notebook"],
   }
 };

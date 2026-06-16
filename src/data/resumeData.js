@@ -96,6 +96,14 @@ export const resumeData = {
         "Handle the administrative tasks of the company.",
       ],
     },
+    {
+      company: "TechTaliya Informatics (P) Ltd.",
+      title: "ML Intern",
+      duration: "June 2026- 1 Month",
+      responsibilities: [
+        "Worked on Python, React, ML Models, Deep Learning and Gen AI.",
+      ],
+    },
   ],
   projects: [
     {
@@ -137,8 +145,8 @@ export const resumeData = {
   skills: {
     languages: ["C/C++", "Python", "Java"],
     frameworks: ["React", "JavaScript", "jQuery", "AJAX"],
-    frontend: [ "HTML", "CSS", "JavaScript"],
+    frontend: ["HTML", "CSS", "JavaScript"],
     backend: ["PHP", "MySQL", "Git"],
-    tools: ["Network Administration", "Data Structures", "Firebase Studio", "WordPress",  "AWS EC2 Hosting", "Linux CL Commands", "Microsoft Office Suite"],
+    tools: ["Network Administration", "Data Structures", "Firebase Studio", "WordPress", "AWS EC2 Hosting", "Linux CL Commands", "Microsoft Office Suite"],
   }
 };

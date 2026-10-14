@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 :root {
   --bg-primary: #2D1E2F;       /* Deep plum main background */
   --bg-card: #4E2A4F;          /* Muted purple card background */

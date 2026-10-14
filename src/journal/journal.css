@@ -1,0 +1,302 @@
+/* ==================================================
+   PASTEL COMIC BOOK & PERSONAL DIARY DESIGN SYSTEM
+   ================================================== */
+
+:root {
+  /* Paper & Canvas Tokens */
+  --bg-desk: #F4EFE6;
+  --paper-ivory: #FCFAF5;
+  --paper-cream: #F7F2E7;
+  --paper-border: #ded6c3;
+  --ink-primary: #2D2A28;
+  --ink-muted: #6b645e;
+  --ink-faint: #9e968f;
+
+  /* Sophisticated Pastel Palette */
+  --pastel-blue: #7EA8BE;
+  --pastel-blue-light: #e9f1f5;
+  --pastel-blue-dark: #597e93;
+
+  --pastel-lavender: #A799B7;
+  --pastel-lavender-light: #f2eff6;
+  --pastel-lavender-dark: #7e6f8f;
+
+  --pastel-sage: #9AB89E;
+  --pastel-sage-light: #eef4ef;
+  --pastel-sage-dark: #6f8f74;
+
+  --pastel-peach: #E8998D;
+  --pastel-peach-light: #fdf2f0;
+  --pastel-peach-dark: #c76e61;
+
+  --pastel-yellow: #F7DF94;
+  --pastel-yellow-light: #fffcee;
+  --pastel-yellow-dark: #d4b75d;
+
+  /* Comic Inking Tokens */
+  --comic-stroke: 2px solid #2D2A28;
+  --comic-stroke-thin: 1.5px solid #2D2A28;
+  --comic-shadow: 3px 3px 0px #2D2A28;
+  --comic-shadow-sm: 2px 2px 0px #2D2A28;
+  --comic-shadow-lg: 5px 5px 0px #2D2A28;
+}
+
+/* Desk Surface Background */
+.journal-surface {
+  background-color: var(--bg-desk);
+  background-image: 
+    radial-gradient(#d8d0c0 0.75px, transparent 0.75px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.4) 0%, transparent 100%);
+  background-size: 24px 24px, 100% 100%;
+  color: var(--ink-primary);
+}
+
+/* Tactile Comic Diary Paper Book */
+.journal-diary-book {
+  background: var(--paper-ivory);
+  background-image: 
+    linear-gradient(to right, rgba(45, 42, 40, 0.015) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(45, 42, 40, 0.015) 1px, transparent 1px);
+  background-size: 24px 24px;
+  border: 2px solid var(--ink-primary);
+  box-shadow: 
+    4px 5px 0px var(--ink-primary),
+    0 20px 40px -10px rgba(70, 60, 50, 0.12);
+  position: relative;
+}
+
+/* Comic Panel Box */
+.comic-panel {
+  background: #ffffff;
+  border: 2px solid var(--ink-primary);
+  box-shadow: 3px 3px 0px var(--ink-primary);
+  border-radius: 6px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.comic-panel:hover {
+  transform: translateY(-1px);
+  box-shadow: 4px 4px 0px var(--ink-primary);
+}
+
+/* Comic Caption Box */
+.comic-caption-box {
+  background: var(--pastel-yellow-light);
+  border: 1.5px solid var(--ink-primary);
+  box-shadow: 2px 2px 0px var(--ink-primary);
+  border-radius: 4px;
+}
+
+/* Comic Speech / Thought Bubble */
+.comic-bubble {
+  position: relative;
+  background: #ffffff;
+  border: 2px solid var(--ink-primary);
+  border-radius: 12px;
+  box-shadow: 2px 2px 0px var(--ink-primary);
+}
+
+.comic-bubble::after {
+  content: "";
+  position: absolute;
+  bottom: -9px;
+  left: 20px;
+  width: 0;
+  height: 0;
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-top: 9px solid var(--ink-primary);
+}
+
+/* Washi Tape Accent Strips */
+.washi-tape-yellow {
+  background: rgba(247, 223, 148, 0.85);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+  border-left: 2px dashed rgba(45, 42, 40, 0.15);
+  border-right: 2px dashed rgba(45, 42, 40, 0.15);
+}
+
+.washi-tape-blue {
+  background: rgba(126, 168, 190, 0.75);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+  border-left: 2px dashed rgba(45, 42, 40, 0.15);
+  border-right: 2px dashed rgba(45, 42, 40, 0.15);
+}
+
+.washi-tape-peach {
+  background: rgba(232, 153, 141, 0.8);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+  border-left: 2px dashed rgba(45, 42, 40, 0.15);
+  border-right: 2px dashed rgba(45, 42, 40, 0.15);
+}
+
+.washi-tape-sage {
+  background: rgba(154, 184, 158, 0.8);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+  border-left: 2px dashed rgba(45, 42, 40, 0.15);
+  border-right: 2px dashed rgba(45, 42, 40, 0.15);
+}
+
+/* Decorative Wire Paper Clip */
+.paper-clip {
+  position: absolute;
+  top: -12px;
+  right: 18px;
+  width: 14px;
+  height: 32px;
+  border: 2px solid var(--ink-primary);
+  border-radius: 8px 8px 0 0;
+  background: transparent;
+  pointer-events: none;
+  z-index: 20;
+}
+
+.paper-clip::after {
+  content: "";
+  position: absolute;
+  top: 4px;
+  left: 2px;
+  width: 6px;
+  height: 20px;
+  border: 1.5px solid var(--ink-primary);
+  border-radius: 4px 4px 0 0;
+}
+
+/* Folded Paper Corner Accent */
+.paper-corner-fold {
+  position: relative;
+}
+
+.paper-corner-fold::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 0 16px 16px 0;
+  border-color: transparent var(--paper-border) transparent transparent;
+  pointer-events: none;
+}
+
+/* Bookmark Ribbon in Pastel Style */
+.ribbon-bookmark-pastel {
+  position: absolute;
+  top: -6px;
+  right: 48px;
+  width: 34px;
+  height: 64px;
+  background: var(--pastel-blue);
+  border: 1.5px solid var(--ink-primary);
+  box-shadow: 2px 3px 0px var(--ink-primary);
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 50% 80%, 0 100%);
+  cursor: pointer;
+  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), background-color 0.2s ease;
+  z-index: 40;
+}
+
+.ribbon-bookmark-pastel:hover {
+  transform: translateY(6px);
+  background: #688fa8;
+}
+
+/* Subtle Book Spine Gutter Line */
+.journal-gutter-pastel {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 28px;
+  width: 2px;
+  background: linear-gradient(to bottom, 
+    transparent 0%, 
+    rgba(45, 42, 40, 0.12) 15%, 
+    rgba(45, 42, 40, 0.12) 85%, 
+    transparent 100%
+  );
+  pointer-events: none;
+}
+
+/* Page Transitions (Smooth Slide & Paper Lift) */
+.page-slide-forward {
+  animation: pageSlideForward 400ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.page-slide-backward {
+  animation: pageSlideBackward 400ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes pageSlideForward {
+  0% {
+    opacity: 0;
+    transform: translateX(24px) scale(0.99);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+  }
+}
+
+@keyframes pageSlideBackward {
+  0% {
+    opacity: 0;
+    transform: translateX(-24px) scale(0.99);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+  }
+}
+
+/* Custom Scrollbar for Journal */
+.journal-scroll::-webkit-scrollbar {
+  width: 6px;
+}
+.journal-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+.journal-scroll::-webkit-scrollbar-thumb {
+  background: rgba(45, 42, 40, 0.15);
+  border-radius: 9999px;
+}
+.journal-scroll::-webkit-scrollbar-thumb:hover {
+  background: rgba(45, 42, 40, 0.3);
+}
+
+/* Handwritten Underline & Scribble */
+.hand-underline {
+  background-image: linear-gradient(120deg, var(--pastel-yellow) 0%, var(--pastel-yellow) 100%);
+  background-repeat: no-repeat;
+  background-size: 100% 35%;
+  background-position: 0 88%;
+}
+
+.hand-underline-peach {
+  background-image: linear-gradient(120deg, var(--pastel-peach-light) 0%, var(--pastel-peach) 100%);
+  background-repeat: no-repeat;
+  background-size: 100% 35%;
+  background-position: 0 88%;
+}
+
+.hand-underline-blue {
+  background-image: linear-gradient(120deg, var(--pastel-blue-light) 0%, var(--pastel-blue) 100%);
+  background-repeat: no-repeat;
+  background-size: 100% 35%;
+  background-position: 0 88%;
+}
+
+/* Reduced Motion Overrides */
+@media (prefers-reduced-motion: reduce) {
+  .page-slide-forward,
+  .page-slide-backward {
+    animation: none !important;
+    transform: none !important;
+    opacity: 1 !important;
+  }
+  .ribbon-bookmark-pastel,
+  .comic-panel,
+  button {
+    transition: none !important;
+  }
+}
+

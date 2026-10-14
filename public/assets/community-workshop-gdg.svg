@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" width="100%" height="100%">
+  <rect width="400" height="300" fill="#eef4ef" stroke="#2D2A28" stroke-width="4"/>
+  <rect x="20" y="20" width="360" height="260" fill="#ffffff" stroke="#2D2A28" stroke-width="2" stroke-dasharray="6 6"/>
+  <!-- Community & hands-on teaching vector artwork -->
+  <g transform="translate(130, 45)">
+    <circle cx="70" cy="40" r="22" fill="#9ab89e" stroke="#2D2A28" stroke-width="2.5"/>
+    <path d="M40 95 C45 70, 95 70, 100 95" fill="#6f8f74" stroke="#2D2A28" stroke-width="2.5"/>
+    <circle cx="30" cy="50" r="16" fill="#ded6c3" stroke="#2D2A28" stroke-width="2"/>
+    <path d="M10 95 C14 78, 46 78, 50 95" fill="#ded6c3" stroke="#2D2A28" stroke-width="2"/>
+    <circle cx="110" cy="50" r="16" fill="#ded6c3" stroke="#2D2A28" stroke-width="2"/>
+    <path d="M90 95 C94 78, 126 78, 130 95" fill="#ded6c3" stroke="#2D2A28" stroke-width="2"/>
+  </g>
+  <!-- Text -->
+  <text x="200" y="195" text-anchor="middle" font-family="'Newsreader', Georgia, serif" font-size="20" font-weight="600" fill="#2D2A28">COMMUNITY &amp; WORKSHOPS</text>
+  <text x="200" y="218" text-anchor="middle" font-family="'Caveat', cursive" font-size="16" fill="#6f8f74">GDG Event Coordination &amp; Hands-on Sessions</text>
+  <!-- Placeholder label on the image -->
+  <rect x="40" y="240" width="320" height="26" rx="4" fill="#f7f2e7" stroke="#2D2A28" stroke-width="1.5"/>
+  <text x="200" y="258" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="12" font-weight="bold" fill="#2D2A28">[ community-workshop-gdg.png ]</text>
+</svg>

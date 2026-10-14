@@ -373,9 +373,9 @@ export default function JourneyPage({ pageData, onSelectFolio, folioMap }) {
             <div className="lg:col-span-5 flex flex-col items-center sm:items-end justify-center pt-2">
               <ProofStickyNote
                 imageName="nasa-space-apps-lead.png"
-                title="NASA Space Apps Challenge 2025"
-                category="VENUE OPERATIONS LEAD"
-                note="Coordinated logistics for national hackathon with 1000+ participants"
+                title="Hands-on session on Git and GitHub"
+                category="Hacktoberfest 2024"
+                note="Led and organized a Git hands-on session as coordinator for the members of GDG on Campus AJCE"
                 color="lavender"
                 tapeColor="blue"
                 rotation="1.5deg"

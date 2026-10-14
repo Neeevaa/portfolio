@@ -104,52 +104,128 @@ export const chaptersData = [
     id: "journey",
     num: "02",
     title: "THE JOURNEY",
-    subtitle: "Education, evolution, and milestones across software and intelligence",
-    summary: "Chronological milestones from first lines of code to advanced machine learning and systems research.",
-    date: "2022 — 2026",
+    subtitle: "Education, evolution of interests, building Synapse, and community learning",
+    summary: "Reflective milestones from finance and cybersecurity curiosity to applied AI, community coordination, and software development.",
+    date: "2022 — PRESENT",
     tag: "TIMELINE",
     pages: [
       {
         id: "journey-p1",
-        layoutType: "timeline",
+        layoutType: "journey",
         chapterNum: "02",
         chapterTitle: "THE JOURNEY",
-        headline: "Evolution of an Engineering Mindset",
-        date: "CHRONOLOGY // 2022 – PRESENT",
-        entryNo: "FOLIO 02.1",
-        summary: "A progression marked by shifting focus from simple scripting to deep systems engineering, local neural models, and scalable architectures.",
-        milestones: [
+        headline: "02 — The Journey",
+        folioTitle: "Finding My Direction",
+        date: "2022 — PRESENT",
+        location: "KERALA, IN",
+        openingReflection: "My path into software and applied intelligence didn't follow a predetermined route. It developed through honest curiosity, exploring different fields, and finding clarity by getting close to how systems actually work.",
+        phases: [
           {
-            period: "2024 — PRESENT",
-            role: "AI/ML Systems & Flagship Development",
-            institution: "Independent & Applied Research",
-            description: "Pioneered Synapse, a local-first conversational agent and telemetry bridge. Deep-dived into quantization algorithms, KV-cache optimization, and multi-agent event buses.",
-            tag: "CURRENT FOCUS",
-            details: ["Local LLM runtimes", "FastAPI / WebSocket streaming", "Memory graph models"]
+            year: "2022",
+            tag: "ACADEMIC FOUNDATIONS",
+            title: "Starting with Finance, Discovering Computing",
+            description: "When I began my Integrated MCA at Amal Jyothi College of Engineering in 2022 (with expected graduation in 2027), I initially imagined a future in finance. But stepping into computer science, writing early programs, and understanding computation opened up a completely new horizon.",
+            note: "Amal Jyothi College of Engineering (Integrated MCA)"
           },
           {
-            period: "2023 — 2024",
-            role: "Full-Stack Software Architecture",
-            institution: "Project Incubations & Academic Labs",
-            description: "Engineered scalable web applications, real-time data pipelines, and responsive client architectures using React, Node.js, and cloud backends.",
-            tag: "SYSTEMS",
-            details: ["Distributed systems", "State synchronization", "Interface ergonomics"]
+            year: "2023 — 2024",
+            tag: "SYSTEMS CURIOSITY",
+            title: "Curiosity About Security & Core Systems",
+            description: "Diving into computer science fundamentals, networks, and operating systems sparked curiosity about cybersecurity—learning how protocols communicate, understanding system boundaries, and developing a habit of digging into underlying mechanics.",
+            note: "Protocols, operating systems & network boundaries"
           },
           {
-            period: "2022 — 2023",
-            role: "Foundations in Computation & ML",
-            institution: "Computer Science & Engineering Tenure",
-            description: "Built foundational expertise in algorithms, linear algebra, operating systems, and core machine learning fundamentals.",
-            tag: "GENESIS",
-            details: ["Data structures & algorithms", "Mathematical modeling", "C / Python primitives"]
+            year: "JULY 2026",
+            tag: "TURNING POINT",
+            title: "Exposure at TechTaliya Informatics",
+            description: "During my internship at TechTaliya Informatics in July 2026, I worked with Python and JavaScript and gained first-hand exposure to applied machine learning and large language model systems. Observing how developers approached a hotel-management chatbot and its retrieval-based workflow helped me understand how AI techniques move from theory into practical software applications.",
+            note: "Applied ML, LLM systems & retrieval architectures"
+          },
+          {
+            year: "PRESENT",
+            tag: "ACTIVE EXPLORATION",
+            title: "Applied AI & Software Engineering",
+            description: "That exposure encouraged me to explore machine learning, natural language processing, LLMs, and RAG pipelines. I am now interested in building dependable software systems and understanding how AI can be integrated into real applications that people rely on.",
+            note: "Full-stack systems, RAG & applied machine learning"
           }
         ],
-        marginalNote: {
-          tag: "CHRONICLE NOTE",
-          category: "EVOLUTION",
-          text: "The steepest learning curves occurred whenever I transitioned from reading papers to implementing their algorithms from scratch in raw code."
+        marginalNote: "Transitioning from abstract concepts to real code taught me that practical understanding comes from observing real systems in production.",
+        proofNotes: [
+          {
+            imageName: "techtaliya-internship.png",
+            title: "TechTaliya Internship",
+            category: "INDUSTRY EXPOSURE",
+            note: "Exposure to applied ML, Python & LLM retrieval workflows (July 2026)",
+            color: "blue",
+            iconType: "code"
+          }
+        ]
+      },
+      {
+        id: "journey-p2",
+        layoutType: "journey",
+        chapterNum: "02",
+        chapterTitle: "THE JOURNEY",
+        headline: "02 — The Journey",
+        folioTitle: "Learning by Building and Participating",
+        date: "2024 — PRESENT",
+        location: "KERALA, IN",
+        openingReflection: "Gaining clarity didn't happen in isolation. It came from building real projects, coordinating community initiatives, and balancing technical discipline with creative craft.",
+        synapseOverview: {
+          title: "Synapse: Learning Through a Complex Project",
+          status: "ONGOING FINAL-YEAR MCA PROJECT",
+          description: "To ground my interest in AI and full-stack systems, I am developing Synapse as my final-year MCA project. Synapse explores how large language models, retrieval-augmented generation (RAG), and structured workflows can assist software project teams with requirements review, meeting intelligence, and task traceability."
         },
-        footnote: "[3] Education and developmental milestones verified across academic records and GitHub history."
+        communityInitiatives: [
+          {
+            title: "AI Playground Session",
+            date: "JULY 2026",
+            role: "Resource Person",
+            description: "Conducted an interactive AI session for 35 students at St. Antony's Public School, Anakkal—introducing practical AI tools and workflows for student learning."
+          },
+          {
+            title: "NASA Space Apps Challenge 2025",
+            date: "OCT 2025",
+            role: "Venue Management Lead",
+            description: "Led venue management operations at Amal Jyothi College of Engineering, coordinating logistics and crowd management for a national hackathon with 1000+ participants."
+          },
+          {
+            title: "Google Solutions Challenge Bootcamp",
+            date: "MARCH 2025",
+            role: "Host & Coordinator",
+            description: "Organized and hosted the Google Solutions Challenge Bootcamp at Kanjirappally, managing crowd coordination and community activities."
+          },
+          {
+            title: "Git Hands-on Session (Hacktoberfest)",
+            date: "OCT 2024",
+            role: "Coordinator & Resource Person",
+            description: "Led and organized a Git hands-on workshop as coordinator and resource person, teaching version control fundamentals to participating students."
+          }
+        ],
+        creativePursuits: {
+          title: "The Knotique & Creative Venturing",
+          date: "EST. JAN 2025",
+          description: "In January 2025, I founded The Knotique, my small crochet business. Alongside dancing, making handmade cards, and travelling, running this small business taught me patience, consistency, and clear communication—qualities that directly influence how I approach software design."
+        },
+        closingReflection: "I am still actively learning, experimenting, and refining where I want to specialise. My goal is to become an engineer who brings strong ownership, clear communication, and thoughtful problem-solving to every system I help build.",
+        proofNotes: [
+          {
+            imageName: "synapse-project-preview.png",
+            title: "Synapse Project Preview",
+            category: "ACADEMIC PROJECT",
+            note: "Exploring AI-assisted project management & retrieval systems (Ongoing)",
+            color: "sage",
+            iconType: "code"
+          },
+          {
+            imageName: "nasa-space-apps-lead.png",
+            title: "NASA Space Apps Challenge 2025",
+            category: "VENUE OPERATIONS LEAD",
+            note: "Coordinated logistics for national hackathon with 1000+ participants",
+            color: "lavender",
+            iconType: "space"
+          }
+        ]
       }
     ]
   },

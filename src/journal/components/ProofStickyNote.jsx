@@ -95,6 +95,28 @@ export default function ProofStickyNote({
             <path d="M28 80 C32 60, 68 60, 72 80" strokeWidth="2.5" strokeLinecap="round" fill="white" />
           </svg>
         );
+      case "code":
+        return (
+          <svg className="w-16 h-16 text-pastel-blueDark" viewBox="0 0 100 100" fill="none" stroke="currentColor">
+            <rect x="18" y="22" width="64" height="56" rx="4" strokeWidth="2.5" fill="#f0f6fa" />
+            <path d="M18 36 H82" strokeWidth="2" />
+            <circle cx="28" cy="29" r="2" fill="currentColor" />
+            <circle cx="36" cy="29" r="2" fill="currentColor" />
+            <circle cx="44" cy="29" r="2" fill="currentColor" />
+            <path d="M38 48 L28 58 L38 68" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
+            <path d="M62 48 L72 58 L62 68" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
+            <line x1="53" y1="46" x2="47" y2="70" strokeWidth="2" strokeLinecap="round" />
+          </svg>
+        );
+      case "space":
+        return (
+          <svg className="w-16 h-16 text-pastel-lavenderDark" viewBox="0 0 100 100" fill="none" stroke="currentColor">
+            <circle cx="50" cy="50" r="24" strokeWidth="2.5" fill="#f2eff6" />
+            <ellipse cx="50" cy="50" rx="38" ry="10" stroke="#2D2A28" strokeWidth="2" strokeDasharray="3 3" transform="rotate(-20 50 50)" />
+            <circle cx="30" cy="30" r="2" fill="#f7df94" stroke="#2D2A28" strokeWidth="1" />
+            <circle cx="72" cy="70" r="2" fill="#f7df94" stroke="#2D2A28" strokeWidth="1" />
+          </svg>
+        );
       case "craft":
       default:
         return (

@@ -143,7 +143,13 @@ export default function Journal() {
     }
 
     if (currentFolio.type === "chapter-page") {
-      return <JournalPageRenderer pageData={currentFolio.pageData} />;
+      return (
+        <JournalPageRenderer
+          pageData={currentFolio.pageData}
+          onSelectFolio={goToFolio}
+          folioMap={folioMap}
+        />
+      );
     }
 
     return null;

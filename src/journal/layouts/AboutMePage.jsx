@@ -64,14 +64,11 @@ export default function AboutMePage({ pageData }) {
 
               <div className="space-y-4 text-base sm:text-lg text-pastel-ink/90 leading-relaxed font-sans">
                 <p className="first-letter:font-editorial first-letter:text-5xl first-letter:float-left first-letter:mr-3 first-letter:leading-none first-letter:text-pastel-peachDark">
-                  I am an MCA student at Amal Jyothi College of Engineering, pursuing my studies with an expected graduation at 2027.
-                </p>
+                  I’m someone who enjoys understanding how things work, figuring out how separate pieces fit together, and turning ideas into something useful.<br></br> My interests sit at the intersection of software engineering, emerging AI technologies, and the human experiences that give technology its purpose.</p>
                 <p>
-                  My journey into technology was not completely planned from the beginning. I once imagined a future in finance, but exploring computing opened up new possibilities. I became curious about cybersecurity before discovering applied machine learning and large language model systems during my internship at TechTaliya.
-                </p>
+                  I like learning by experimenting, asking questions, and working through problems I don’t fully understand yet.<br></br> I’m interested not just in what a system can do, but also in how it works, where it falls short, and how it could be made more useful.</p>
                 <p>
-                  That experience encouraged me to explore machine learning, natural language processing, LLMs, and AI engineering. I am now interested in building useful software systems and understanding how AI can be integrated into real applications.
-                </p>
+                  Beyond the screen, I find a different kind of satisfaction in crochet, dance, handmade crafts, and bringing people together.<br></br> These interests may seem unrelated to engineering, but they are all ways I enjoy creating, exploring, and connecting with others.</p>
               </div>
             </div>
 
@@ -79,9 +76,9 @@ export default function AboutMePage({ pageData }) {
             <div className="lg:col-span-5 flex flex-col items-center sm:items-end justify-center pt-2">
               <ProofStickyNote
                 imageName="neeva-personal-portrait.png"
-                title="Personal Photo / Workspace"
-                category="PERSONAL PHOTO"
-                note="MCA student at Amal Jyothi College of Engineering (expected graduation at 2027)"
+                title="Hi! I'm Neeva Sunish Mathew"
+                category="Profile"
+                note="MCA student at Amal Jyothi College of Engineering. Looking for opportunities to apply AI, software engineering, and design to real-world problems. Open to internships and collaborations."
                 color="blue"
                 tapeColor="peach"
                 rotation="1.2deg"
@@ -330,9 +327,9 @@ export default function AboutMePage({ pageData }) {
               {/* Sticky Note 4: Handmade Cards & Creative Craft */}
               <ProofStickyNote
                 imageName="handmade-cards-craft.png"
-                title="Handmade Cards &amp; Creative Work"
-                category="CREATIVE CRAFT"
-                note="Making handmade cards and creative craft"
+                title="The Knotique !!"
+                category="CROCHETE WORKS"
+                note="Keychains and Charms"
                 color="lavender"
                 tapeColor="sage"
                 rotation="-1.2deg"

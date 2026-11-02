@@ -1,10 +1,8 @@
-import React from "react";
 import AboutMePage from "./AboutMePage";
 import JourneyPage from "./JourneyPage";
 import DiaryTextPage from "./DiaryTextPage";
 import ProjectShowcasePage from "./ProjectShowcasePage";
 import TechnicalCaseStudyPage from "./TechnicalCaseStudyPage";
-import TimelineJourneyPage from "./TimelineJourneyPage";
 import ResearchNotebookPage from "./ResearchNotebookPage";
 import TechnicalIndexPage from "./TechnicalIndexPage";
 import PhotoPersonalPage from "./PhotoPersonalPage";
@@ -20,6 +18,24 @@ export default function JournalPageRenderer({ pageData, onSelectFolio, folioMap 
     case "timeline":
       return (
         <JourneyPage
+          pageData={pageData}
+          onSelectFolio={onSelectFolio}
+          folioMap={folioMap}
+        />
+      );
+    case "project":
+    case "projects":
+      return (
+        <ProjectShowcasePage
+          pageData={pageData}
+          onSelectFolio={onSelectFolio}
+          folioMap={folioMap}
+        />
+      );
+    case "case-study":
+    case "technical-case-study":
+      return (
+        <TechnicalCaseStudyPage
           pageData={pageData}
           onSelectFolio={onSelectFolio}
           folioMap={folioMap}

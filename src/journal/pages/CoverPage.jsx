@@ -53,8 +53,9 @@ export default function CoverPage({ onOpen }) {
         {/* Main Editorial Headline */}
         <h1 className="font-editorial text-5xl sm:text-7xl md:text-8xl lg:text-9xl font-normal tracking-tight leading-[0.92] text-pastel-ink">
           NEEVA<br />
+          SUNISH<br />
           <span className="relative inline-block">
-            SUNISH
+            MATHEW
             <svg
               className="absolute -bottom-2 left-0 w-full text-pastel-yellow"
               height="8"
@@ -64,8 +65,7 @@ export default function CoverPage({ onOpen }) {
             >
               <path d="M0,5 Q50,0 100,5" stroke="currentColor" strokeWidth="4" fill="none" />
             </svg>
-          </span><br />
-          MATHEW
+          </span>
         </h1>
 
         {/* Subtitle Chips (Curated Engineering Disciplines) */}

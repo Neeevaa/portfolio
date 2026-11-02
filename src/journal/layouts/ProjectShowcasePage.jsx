@@ -1,224 +1,762 @@
 import React, { useState } from "react";
 
-export default function ProjectShowcasePage({ pageData }) {
-  const {
-    chapterNum,
-    chapterTitle,
-    projectNo,
-    projectName,
-    headline,
-    subtitle,
-    status = "SHIPPED",
-    year = "2026",
-    techStack = [],
-    metrics = [],
-    comicComment,
-    techNote,
-    links = [],
-  } = pageData;
+/**
+ * Tactical Specimen Image component with PNG -> SVG -> Vector fallback
+ * Shows clear placeholder instructions and filenames when assets are specimens.
+ */
+function ProjectSpecimenPlate({
+  imageName = "placeholder.png",
+  title = "Project Specimen",
+  caption,
+  tapeColor = "yellow",
+  aspectRatio = "aspect-[16/10]",
+  badge = "SPECIMEN",
+  className = "",
+}) {
+  const [useSvg, setUseSvg] = useState(false);
+  const [inlineFallback, setInlineFallback] = useState(false);
 
-  const [activeTab, setActiveTab] = useState("telemetry");
+  const tapeClasses = {
+    yellow: "washi-tape-yellow",
+    peach: "washi-tape-peach",
+    blue: "washi-tape-blue",
+    sage: "washi-tape-sage",
+  };
+
+  const pngSrc = `/assets/${imageName}`;
+  const svgSrc = `/assets/${imageName.replace(/\.png$/, ".svg")}`;
+  const currentSrc = useSvg ? svgSrc : pngSrc;
+
+  const handleImageError = () => {
+    if (!useSvg) {
+      setUseSvg(true);
+    } else {
+      setInlineFallback(true);
+    }
+  };
 
   return (
-    <div className="relative min-h-[580px] p-6 sm:p-10 md:p-14 select-text bg-pastel-paper text-pastel-ink">
-      {/* Chapter Tag & Project Folio */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-6 border-b-2 border-pastel-ink/15 gap-3">
-        <div className="flex items-center gap-3">
-          <span className="px-2.5 py-0.5 rounded bg-pastel-blueLight border border-pastel-ink shadow-comic-sm font-comic text-xs font-bold text-pastel-ink uppercase tracking-wider">
-            CHAPTER {chapterNum}
-          </span>
-          <span className="text-pastel-inkMuted">/</span>
-          <span className="font-comic text-sm font-bold tracking-wide uppercase text-pastel-inkMuted">
-            {chapterTitle}
-          </span>
-        </div>
+    <figure className={`relative rounded-md border-2 border-pastel-ink bg-white p-2.5 sm:p-3 shadow-comic select-none ${className}`}>
+      {/* Decorative Washi Tape */}
+      <div
+        className={`absolute -top-3 left-1/2 -translate-x-1/2 w-20 sm:w-24 h-5 rounded-xs ${
+          tapeClasses[tapeColor] || "washi-tape-yellow"
+        } rotate-[-1deg] z-20 pointer-events-none`}
+        aria-hidden="true"
+      />
 
-        <div className="flex items-center gap-3 font-comic text-xs text-pastel-inkMuted">
-          <span className="px-2.5 py-0.5 rounded bg-pastel-yellow border border-pastel-ink text-pastel-ink font-bold shadow-comic-sm">
-            {projectNo}
-          </span>
-          <span>STATUS: {status}</span>
-          <span>•</span>
-          <span>{year}</span>
-        </div>
-      </div>
-
-      {/* Main Project Header */}
-      <div className="mt-8 space-y-4">
-        <div className="inline-block px-3 py-1 rounded bg-pastel-peachLight border border-pastel-ink font-comic text-sm font-bold tracking-wider text-pastel-peachDark shadow-comic-sm">
-          ★ {projectName || projectNo}
-        </div>
-        <h2 className="font-editorial text-3xl sm:text-5xl font-normal leading-[1.1] text-pastel-ink">
-          {headline}
-        </h2>
-        {subtitle && (
-          <p className="max-w-3xl text-base sm:text-lg text-pastel-ink/85 leading-relaxed font-sans font-normal">
-            {subtitle}
-          </p>
-        )}
-
-        {/* Tech Stack Sticker Pills */}
-        {techStack.length > 0 && (
-          <div className="flex flex-wrap gap-2 pt-2">
-            {techStack.map((tech) => (
-              <span
-                key={tech}
-                className="px-3 py-1 rounded-full bg-white border-1.5 border-pastel-ink font-comic text-xs font-bold text-pastel-ink shadow-comic-sm hover:bg-pastel-yellowLight transition-colors"
-              >
-                {tech}
-              </span>
-            ))}
-          </div>
-        )}
-      </div>
-
-      {/* Illustrated Technical Console (Comic Diagnostic Panel) */}
-      <div className="mt-8 rounded-lg border-2 border-pastel-ink bg-white overflow-hidden shadow-comic">
-        {/* Title Bar */}
-        <div className="flex items-center justify-between px-4 py-3 bg-pastel-paperAlt border-b-2 border-pastel-ink">
-          <div className="flex items-center gap-2">
-            <span className="w-3 h-3 rounded-full bg-pastel-peach border border-pastel-ink"></span>
-            <span className="w-3 h-3 rounded-full bg-pastel-yellow border border-pastel-ink"></span>
-            <span className="w-3 h-3 rounded-full bg-pastel-sage border border-pastel-ink"></span>
-            <span className="ml-3 font-comic text-xs font-bold text-pastel-ink tracking-wider">
-              {projectNo.toLowerCase()} // diagnostic-console
-            </span>
-          </div>
-          <div className="flex items-center gap-2">
-            <button
-              onClick={() => setActiveTab("telemetry")}
-              className={`font-comic text-xs px-2.5 py-0.5 rounded font-bold transition-all ${
-                activeTab === "telemetry"
-                  ? "bg-pastel-blue text-white border border-pastel-ink shadow-comic-sm"
-                  : "text-pastel-inkMuted hover:text-pastel-ink"
-              }`}
-            >
-              METRICS
-            </button>
-            <button
-              onClick={() => setActiveTab("stream")}
-              className={`font-comic text-xs px-2.5 py-0.5 rounded font-bold transition-all ${
-                activeTab === "stream"
-                  ? "bg-pastel-blue text-white border border-pastel-ink shadow-comic-sm"
-                  : "text-pastel-inkMuted hover:text-pastel-ink"
-              }`}
-            >
-              EXECUTION TRACE
-            </button>
-          </div>
-        </div>
-
-        {/* Dashboard Body with Pastel Stat Cards */}
-        <div className="p-5 sm:p-6 space-y-6 bg-pastel-paper/40">
-          {/* Key Metric Gauges */}
-          {metrics.length > 0 && (
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4">
-              {metrics.map((m, idx) => {
-                const bgColors = ["bg-pastel-blueLight", "bg-pastel-lavenderLight", "bg-pastel-sageLight", "bg-pastel-yellowLight"];
-                const cardBg = bgColors[idx % bgColors.length];
-
-                return (
-                  <div key={idx} className={`p-3.5 rounded-md border-2 border-pastel-ink ${cardBg} shadow-comic-sm`}>
-                    <div className="font-comic text-[11px] font-bold text-pastel-inkMuted uppercase tracking-wider">
-                      {m.label}
-                    </div>
-                    <div className="mt-1 font-mono text-2xl sm:text-3xl text-pastel-ink font-semibold tracking-tight">
-                      {m.value} <span className="text-xs font-mono font-normal text-pastel-inkMuted">{m.unit}</span>
-                    </div>
-                    {m.change && (
-                      <div className="mt-1 font-hand text-sm font-bold text-pastel-ink">
-                        {m.change}
-                      </div>
-                    )}
-                  </div>
-                );
-              })}
+      {/* Frame Container */}
+      <div
+        className={`relative w-full ${aspectRatio} rounded-sm overflow-hidden border border-pastel-ink/40 bg-pastel-paperAlt flex flex-col items-center justify-center`}
+      >
+        {!inlineFallback ? (
+          <img
+            src={currentSrc}
+            alt={title}
+            onError={handleImageError}
+            className="w-full h-full object-cover transition-transform duration-300 hover:scale-[1.02]"
+            loading="lazy"
+          />
+        ) : (
+          <div className="flex flex-col items-center justify-center p-4 text-center space-y-2">
+            <div className="w-12 h-12 rounded-full border-2 border-dashed border-pastel-ink/40 bg-white flex items-center justify-center text-pastel-inkMuted">
+              <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <rect x="3" y="3" width="18" height="18" rx="2" />
+                <circle cx="8.5" cy="8.5" r="1.5" />
+                <polyline points="21 15 16 10 5 21" />
+              </svg>
             </div>
-          )}
-
-          {/* Trace view */}
-          <div className="p-4 rounded-md border-2 border-pastel-ink bg-white font-mono text-xs shadow-comic-sm">
-            <div className="flex items-center justify-between text-[11px] text-pastel-inkMuted pb-2 border-b border-pastel-ink/20 mb-2">
-              <span className="font-comic text-xs font-bold text-pastel-ink uppercase">
-                REAL-TIME EXECUTION PIPELINE
-              </span>
-              <span className="font-hand text-sm font-bold text-pastel-sageDark">✓ Verified Stream</span>
+            <div className="px-2.5 py-1 rounded bg-white border border-pastel-ink/50 font-mono text-xs font-bold text-pastel-ink shadow-comic-sm">
+              [ {imageName} ]
             </div>
-            <div className="space-y-2 text-pastel-ink text-xs font-sans">
-              <div className="flex items-center gap-2">
-                <span className="font-mono text-pastel-blueDark font-bold">0.00ms</span>
-                <span className="text-pastel-inkMuted">➔</span>
-                <span>Inbound frame parsed via ASGI WebSocket channel</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <span className="font-mono text-pastel-blueDark font-bold">14.2ms</span>
-                <span className="text-pastel-inkMuted">➔</span>
-                <span>Context vector retrieval: top-3 chunks injected into memory</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <span className="font-mono text-pastel-blueDark font-bold">42.1ms</span>
-                <span className="text-pastel-inkMuted">➔</span>
-                <span className="font-semibold text-pastel-peachDark">First token emitted &amp; streamed to client</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <span className="font-mono text-pastel-blueDark font-bold">280ms</span>
-                <span className="text-pastel-inkMuted">➔</span>
-                <span>Turn completed (32 tokens, 114 tok/s sustained)</span>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Caption below visual */}
-        <div className="px-4 py-2.5 bg-pastel-paperAlt border-t-2 border-pastel-ink text-xs font-hand flex justify-between items-center text-pastel-inkMuted">
-          <span className="text-base text-pastel-ink">
-            {comicComment || "★ Diagnostic telemetry snapshot from local execution run"}
-          </span>
-          <span className="font-comic font-bold text-pastel-blueDark uppercase">
-            STATUS: PASS
-          </span>
-        </div>
-      </div>
-
-      {/* Technical Note Sticky Callout & Action Links */}
-      <div className="mt-8 grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
-        {/* Tech Note (8 cols) */}
-        {techNote && (
-          <div className="lg:col-span-8 p-5 rounded-md border-2 border-pastel-ink bg-pastel-yellowLight shadow-comic relative">
-            <div className="flex items-center gap-2 font-comic text-xs font-bold text-pastel-ink uppercase tracking-wider mb-1.5">
-              <span>{techNote.tag}</span>
-              <span className="text-pastel-peachDark">★ {techNote.category}</span>
-            </div>
-            <p className="font-sans text-sm sm:text-base text-pastel-ink leading-relaxed">
-              {techNote.text}
+            <p className="font-mono text-[10px] text-pastel-inkMuted uppercase tracking-wider">
+              Drop screenshot in: /public/assets/{imageName}
             </p>
           </div>
         )}
 
-        {/* Action Links (4 cols) */}
-        {links.length > 0 && (
-          <div className="lg:col-span-4 flex flex-col gap-2.5 font-comic text-xs">
-            {links.map((link, idx) => (
-              <a
-                key={idx}
-                href={link.href}
-                target={link.external ? "_blank" : "_self"}
-                rel={link.external ? "noopener noreferrer" : ""}
-                className="px-4 py-3 rounded-md border-2 border-pastel-ink bg-white hover:bg-pastel-peach hover:text-white shadow-comic-sm hover:shadow-comic hover:-translate-y-0.5 active:translate-y-0 text-pastel-ink font-bold transition-all flex items-center justify-between cursor-pointer"
-              >
-                <span>{link.label}</span>
-                <span className="text-sm font-bold">➔</span>
-              </a>
-            ))}
-          </div>
-        )}
+        {/* Specimen Badge Stamp */}
+        <div className="absolute top-2 left-2 z-10 px-2 py-0.5 rounded bg-white/95 border border-pastel-ink font-mono text-[10px] font-bold text-pastel-ink shadow-comic-sm">
+          ★ {badge}
+        </div>
       </div>
 
-      {/* Footer rule */}
-      <div className="mt-10 pt-4 border-t-2 border-pastel-ink/15 flex justify-between font-hand text-base text-pastel-inkMuted">
-        <div>★ Illustrated project specimen // Recorded in personal engineering notebook</div>
-        <div className="font-comic text-xs font-bold uppercase text-pastel-blueDark">FOLIO CH.{chapterNum}</div>
-      </div>
+      {/* Caption if provided */}
+      {caption && (
+        <figcaption className="mt-2 text-center">
+          <span className="font-hand text-sm text-pastel-inkMuted">
+            {caption}
+          </span>
+        </figcaption>
+      )}
+    </figure>
+  );
+}
+
+/**
+ * Chapter 03 — Things I Build
+ * Layout handles the 3 distinct editorial spreads:
+ * - Folio 1 (build-p1): The Workbench (Synapse flagship spread)
+ * - Folio 2 (build-p2): Experiments & Applications (Veritas Vision & Hyred)
+ * - Folio 3 (build-p3): Systems & Collaboration (Aromiq & Crux)
+ */
+export default function ProjectShowcasePage({ pageData, onSelectFolio, folioMap }) {
+  if (!pageData) return null;
+
+  const {
+    id,
+    folioType = "workbench",
+    chapterNum = "03",
+    chapterTitle = "THINGS I BUILD",
+    folioLabel = "FOLIO 07",
+    folioTitle = "The Workbench",
+    date = "2024 — PRESENT",
+    location = "KOCHI, IN",
+    openingReflection,
+    flagship,
+    projects = [],
+    marginalNote,
+  } = pageData;
+
+  // Jump handler to Chapter 04 (Synapse technical case study)
+  const handleJumpToSynapseCaseStudy = () => {
+    if (onSelectFolio && folioMap && folioMap["synapse"] !== undefined) {
+      onSelectFolio(folioMap["synapse"]);
+    }
+  };
+
+  return (
+    <div className="relative min-h-[580px] md:min-h-[640px] p-6 sm:p-10 md:p-12 lg:p-14 select-text bg-pastel-paper text-pastel-ink paper-corner-fold overflow-hidden">
+      {/* Decorative Washi Tape across Top Header */}
+      <div
+        className="absolute -top-3 left-14 sm:left-24 w-28 sm:w-36 h-6 washi-tape-blue rotate-[1deg] z-20 pointer-events-none"
+        aria-hidden="true"
+      />
+
+      {/* Header & Running Chapter Metadata Bar */}
+      <header className="flex flex-col sm:flex-row sm:items-center justify-between pb-5 border-b-2 border-pastel-ink/15 gap-3">
+        <div className="flex flex-wrap items-center gap-2.5">
+          <span className="px-2.5 py-0.5 rounded bg-pastel-blueLight border border-pastel-ink shadow-comic-sm font-comic text-xs font-bold text-pastel-ink uppercase tracking-wider">
+            CHAPTER {chapterNum}
+          </span>
+          <span className="text-pastel-inkMuted" aria-hidden="true">/</span>
+          <span className="font-comic text-sm font-bold tracking-wide uppercase text-pastel-ink">
+            {chapterTitle}
+          </span>
+          <span className="px-2 py-0.5 rounded bg-white border border-pastel-ink/40 font-mono text-[11px] text-pastel-inkMuted font-semibold">
+            {folioLabel}
+          </span>
+        </div>
+
+        <div className="flex items-center gap-2.5 font-mono text-xs text-pastel-inkMuted">
+          <span>{date}</span>
+          <span>•</span>
+          <span>{location}</span>
+        </div>
+      </header>
+
+      {/* ========================================================
+          FOLIO 1: The Workbench (Opening Spread & Synapse Flagship)
+          ======================================================== */}
+      {folioType === "workbench" && flagship && (
+        <div className="mt-8 space-y-8">
+          {/* Chapter Title & Opening Workbench Manifesto */}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+            <div className="lg:col-span-7 space-y-3">
+              <div className="space-y-1">
+                <span className="font-comic text-xs font-bold text-pastel-peachDark uppercase tracking-wider">
+                  ★ SPREAD 1 • THE WORKBENCH
+                </span>
+                <h2 className="font-editorial text-4xl sm:text-5xl font-normal leading-[1.08] text-pastel-ink">
+                  03 — Things I Build
+                </h2>
+                <div className="font-hand text-xl text-pastel-inkMuted">
+                  {folioTitle}
+                </div>
+              </div>
+
+              <div className="p-4 sm:p-5 rounded-lg bg-pastel-yellowLight border-2 border-pastel-ink shadow-comic">
+                <p className="font-sans text-base sm:text-lg text-pastel-ink/95 leading-relaxed">
+                  {openingReflection}
+                </p>
+              </div>
+            </div>
+
+            {/* Quick Summary Pill Panel */}
+            <div className="lg:col-span-5 flex flex-col justify-center space-y-3 p-4 rounded-lg bg-white border-2 border-pastel-ink shadow-comic-sm">
+              <div className="flex items-center justify-between border-b border-pastel-ink/20 pb-2">
+                <span className="font-comic text-xs font-bold uppercase tracking-wider text-pastel-blueDark">
+                  SHOWCASE INDEX
+                </span>
+                <span className="font-mono text-[11px] text-pastel-inkMuted">5 VERIFIED PROJECTS</span>
+              </div>
+              <ul className="space-y-1.5 font-sans text-xs text-pastel-ink">
+                <li className="flex items-center justify-between">
+                  <span className="font-semibold text-pastel-peachDark">01. Synapse</span>
+                  <span className="font-mono text-[10px] px-1.5 py-0.5 rounded bg-pastel-peachLight border border-pastel-ink/30">FLAGSHIP</span>
+                </li>
+                <li className="flex items-center justify-between">
+                  <span>02. Veritas Vision</span>
+                  <span className="font-mono text-[10px] px-1.5 py-0.5 rounded bg-pastel-lavenderLight border border-pastel-ink/30">AI PROTOTYPE</span>
+                </li>
+                <li className="flex items-center justify-between">
+                  <span>03. Hyred</span>
+                  <span className="font-mono text-[10px] px-1.5 py-0.5 rounded bg-pastel-yellowLight border border-pastel-ink/30">CAREER CO-PILOT</span>
+                </li>
+                <li className="flex items-center justify-between">
+                  <span>04. Aromiq</span>
+                  <span className="font-mono text-[10px] px-1.5 py-0.5 rounded bg-pastel-sageLight border border-pastel-ink/30">COURSEWORK</span>
+                </li>
+                <li className="flex items-center justify-between">
+                  <span>05. Crux</span>
+                  <span className="font-mono text-[10px] px-1.5 py-0.5 rounded bg-pastel-blueLight border border-pastel-ink/30">COLLABORATION</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          {/* Flagship Feature Card: Synapse */}
+          <div className="relative rounded-lg border-2 border-pastel-ink bg-white p-6 sm:p-8 shadow-comic-lg space-y-6">
+            {/* Flagship Ribbon Badge */}
+            <div className="flex flex-wrap items-center justify-between gap-3 pb-4 border-b-2 border-pastel-ink/15">
+              <div className="flex flex-wrap items-center gap-2">
+                <span className="px-3 py-1 rounded bg-pastel-peach border-2 border-pastel-ink font-comic text-xs font-bold text-pastel-ink shadow-comic-sm uppercase tracking-wide">
+                  ★ {flagship.statusBadge}
+                </span>
+                <span className="px-2.5 py-0.5 rounded bg-pastel-sageLight border border-pastel-ink/50 font-mono text-[11px] font-bold text-pastel-sageDark">
+                  STATUS: {flagship.status}
+                </span>
+              </div>
+              <span className="font-mono text-xs font-semibold text-pastel-inkMuted">
+                YEAR: {flagship.year}
+              </span>
+            </div>
+
+            {/* Title & Purpose */}
+            <div className="space-y-2">
+              <h3 className="font-editorial text-3xl sm:text-4xl font-normal text-pastel-ink leading-tight">
+                {flagship.title}
+              </h3>
+              <p className="font-sans text-base sm:text-lg text-pastel-ink/90 leading-relaxed max-w-4xl">
+                {flagship.purpose}
+              </p>
+              <p className="font-sans text-sm text-pastel-inkMuted leading-relaxed max-w-4xl">
+                {flagship.intendedValue}
+              </p>
+            </div>
+
+            {/* Tech Stack Pills */}
+            <div className="space-y-2">
+              <div className="font-comic text-xs font-bold uppercase tracking-wider text-pastel-inkMuted">
+                VERIFIED TECH STACK
+              </div>
+              <div className="flex flex-wrap gap-2">
+                {flagship.techStack.map((tech) => (
+                  <span
+                    key={tech}
+                    className="px-3 py-1 rounded-full bg-pastel-paperAlt border-1.5 border-pastel-ink font-mono text-xs font-bold text-pastel-ink shadow-comic-sm hover:bg-pastel-yellowLight transition-colors"
+                  >
+                    {tech}
+                  </span>
+                ))}
+              </div>
+            </div>
+
+            {/* Flagship Visual Specimen & Modules Grid */}
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start pt-2">
+              {/* Left: Genuine / Vector Specimen Plate (5 cols) */}
+              <div className="lg:col-span-5">
+                <ProjectSpecimenPlate
+                  imageName={flagship.imageName}
+                  title="Synapse Architecture & Preview"
+                  caption="Figure 3.1: Synapse project interface & AI task generation module."
+                  tapeColor="peach"
+                  badge="FLAGSHIP SPECIMEN"
+                />
+              </div>
+
+              {/* Right: Implemented & Explored Modules (7 cols) */}
+              <div className="lg:col-span-7 space-y-3">
+                <div className="font-comic text-xs font-bold uppercase tracking-wider text-pastel-inkMuted pb-1 border-b border-pastel-ink/20">
+                  CORE MODULES &amp; EXPLORED CAPABILITIES
+                </div>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  {flagship.modules.map((m, idx) => (
+                    <div
+                      key={idx}
+                      className="p-3.5 rounded-md border-2 border-pastel-ink bg-pastel-paperAlt/80 shadow-comic-sm space-y-1 hover:bg-white transition-colors"
+                    >
+                      <div className="flex items-center gap-1.5">
+                        <span className="w-2 h-2 rounded-full bg-pastel-peach border border-pastel-ink" />
+                        <h4 className="font-comic text-xs font-bold text-pastel-ink uppercase tracking-wide">
+                          {m.title}
+                        </h4>
+                      </div>
+                      <p className="font-sans text-xs text-pastel-ink/85 leading-relaxed">
+                        {m.desc}
+                      </p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            {/* Technical Note Callout & Action Buttons */}
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start pt-2">
+              {/* Note (8 cols) */}
+              <div className="lg:col-span-8 p-4 rounded-md border-2 border-pastel-ink bg-pastel-yellowLight shadow-comic space-y-1">
+                <div className="flex items-center gap-2 font-comic text-xs font-bold text-pastel-ink uppercase tracking-wider">
+                  <span>{flagship.techNote.tag}</span>
+                  <span className="text-pastel-peachDark">★ {flagship.techNote.category}</span>
+                </div>
+                <p className="font-sans text-xs sm:text-sm text-pastel-ink leading-relaxed">
+                  {flagship.techNote.text}
+                </p>
+              </div>
+
+              {/* Action Buttons (4 cols) */}
+              <div className="lg:col-span-4 flex flex-col gap-2.5 font-comic text-xs">
+                {flagship.repoUrl && (
+                  <a
+                    href={flagship.repoUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="px-4 py-3 rounded-md border-2 border-pastel-ink bg-white hover:bg-pastel-blueLight text-pastel-ink shadow-comic-sm hover:shadow-comic hover:-translate-y-0.5 active:translate-y-0 font-bold transition-all flex items-center justify-between cursor-pointer"
+                  >
+                    <span>VIEW REPOSITORY ON GITHUB</span>
+                    <span className="text-sm font-bold">↗</span>
+                  </a>
+                )}
+                <button
+                  type="button"
+                  onClick={handleJumpToSynapseCaseStudy}
+                  className="px-4 py-3 rounded-md border-2 border-pastel-ink bg-pastel-peach hover:bg-pastel-peachDark hover:text-white text-pastel-ink shadow-comic-sm hover:shadow-comic hover:-translate-y-0.5 active:translate-y-0 font-bold transition-all flex items-center justify-between cursor-pointer text-left"
+                >
+                  <span>{flagship.caseStudyLabel}</span>
+                  <span className="text-sm font-bold">➔</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* ========================================================
+          FOLIO 2: Experiments & Applications (Veritas Vision & Hyred)
+          ======================================================== */}
+      {folioType === "experiments" && projects.length >= 2 && (
+        <div className="mt-8 space-y-8">
+          {/* Section Header */}
+          <div className="space-y-1 pb-4 border-b-2 border-pastel-ink/15">
+            <span className="font-comic text-xs font-bold text-pastel-lavenderDark uppercase tracking-wider">
+              ★ SPREAD 2 • EXPERIMENTS &amp; APPLICATIONS
+            </span>
+            <h2 className="font-editorial text-4xl sm:text-5xl font-normal leading-[1.08] text-pastel-ink">
+              03 — Things I Build
+            </h2>
+            <p className="font-sans text-base text-pastel-inkMuted leading-relaxed max-w-3xl">
+              {openingReflection}
+            </p>
+          </div>
+
+          {/* Two Distinct Project Cards */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
+            {/* Project 1: Veritas Vision */}
+            {projects[0] && (
+              <div className="relative rounded-lg border-2 border-pastel-ink bg-white p-5 sm:p-6 shadow-comic space-y-5">
+                {/* Washi Tape Header */}
+                <div
+                  className="absolute -top-3 left-10 w-24 h-5 rounded-xs washi-tape-lavender rotate-[-1deg] z-20 pointer-events-none"
+                  aria-hidden="true"
+                />
+
+                <div className="flex items-center justify-between pb-3 border-b border-pastel-ink/15 pt-1">
+                  <span className="px-2.5 py-0.5 rounded bg-pastel-lavenderLight border border-pastel-ink font-comic text-xs font-bold text-pastel-lavenderDark uppercase">
+                    ★ {projects[0].badge}
+                  </span>
+                  <span className="font-mono text-[11px] text-pastel-inkMuted font-semibold">
+                    {projects[0].projectNo}
+                  </span>
+                </div>
+
+                <div className="space-y-1.5">
+                  <h3 className="font-editorial text-2xl sm:text-3xl font-normal text-pastel-ink">
+                    {projects[0].name}
+                  </h3>
+                  <div className="font-mono text-xs font-semibold text-pastel-lavenderDark">
+                    STATUS: {projects[0].status}
+                  </div>
+                  <p className="font-sans text-xs sm:text-sm text-pastel-ink/90 leading-relaxed pt-1">
+                    {projects[0].purpose}
+                  </p>
+                </div>
+
+                {/* Visual Specimen Plate */}
+                <ProjectSpecimenPlate
+                  imageName={projects[0].imageName}
+                  title="Veritas Vision Prototype Preview"
+                  caption="Figure 3.2: Misinformation assessment interface & typology explorer."
+                  tapeColor="yellow"
+                  badge="AI RESEARCH SPECIMEN"
+                />
+
+                {/* Important AI Credibility / Heuristic Disclaimer Alert */}
+                <div className="p-3.5 rounded bg-pastel-lavenderLight border-1.5 border-pastel-ink shadow-comic-sm space-y-1">
+                  <div className="flex items-center gap-1.5 font-comic text-[11px] font-bold text-pastel-lavenderDark uppercase">
+                    <span>✦ CREDIBILITY NOTE</span>
+                  </div>
+                  <p className="font-sans text-xs text-pastel-ink/90 leading-relaxed">
+                    {projects[0].aiDisclaimer}
+                  </p>
+                </div>
+
+                {/* Verified Capabilities Checklist */}
+                <div className="space-y-2">
+                  <div className="font-comic text-xs font-bold uppercase tracking-wider text-pastel-inkMuted">
+                    VERIFIED IMPLEMENTATION
+                  </div>
+                  <ul className="space-y-1.5 font-sans text-xs text-pastel-ink">
+                    {projects[0].verifiedCapabilities.map((cap, i) => (
+                      <li key={i} className="flex items-start gap-2">
+                        <span className="font-bold text-pastel-lavenderDark mt-0.5">✓</span>
+                        <span className="leading-snug">{cap}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+
+                {/* Tech Stack Pills */}
+                <div className="space-y-2 pt-1 border-t border-pastel-ink/15">
+                  <div className="font-comic text-[11px] font-bold uppercase tracking-wider text-pastel-inkMuted">
+                    TECHNOLOGIES INVOLVED
+                  </div>
+                  <div className="flex flex-wrap gap-1.5">
+                    {projects[0].techStack.map((tech) => (
+                      <span
+                        key={tech}
+                        className="px-2.5 py-0.5 rounded-full bg-pastel-paperAlt border border-pastel-ink/40 font-mono text-[11px] text-pastel-ink font-semibold"
+                      >
+                        {tech}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Link Note */}
+                <div className="pt-2 border-t border-pastel-ink/15 font-mono text-[11px] text-pastel-inkMuted flex items-center justify-between">
+                  <span>REPOSITORY:</span>
+                  <span className="font-semibold text-pastel-ink">
+                    {projects[0].repoLabel}
+                  </span>
+                </div>
+              </div>
+            )}
+
+            {/* Project 2: Hyred */}
+            {projects[1] && (
+              <div className="relative rounded-lg border-2 border-pastel-ink bg-white p-5 sm:p-6 shadow-comic space-y-5">
+                {/* Washi Tape Header */}
+                <div
+                  className="absolute -top-3 left-10 w-24 h-5 rounded-xs washi-tape-peach rotate-[1deg] z-20 pointer-events-none"
+                  aria-hidden="true"
+                />
+
+                <div className="flex items-center justify-between pb-3 border-b border-pastel-ink/15 pt-1">
+                  <span className="px-2.5 py-0.5 rounded bg-pastel-peachLight border border-pastel-ink font-comic text-xs font-bold text-pastel-peachDark uppercase">
+                    ★ {projects[1].badge}
+                  </span>
+                  <span className="font-mono text-[11px] text-pastel-inkMuted font-semibold">
+                    {projects[1].projectNo}
+                  </span>
+                </div>
+
+                <div className="space-y-1.5">
+                  <h3 className="font-editorial text-2xl sm:text-3xl font-normal text-pastel-ink">
+                    {projects[1].name}
+                  </h3>
+                  <div className="font-mono text-xs font-semibold text-pastel-peachDark">
+                    STATUS: {projects[1].status}
+                  </div>
+                  <p className="font-sans text-xs sm:text-sm text-pastel-ink/90 leading-relaxed pt-1">
+                    {projects[1].purpose}
+                  </p>
+                </div>
+
+                {/* Visual Specimen Plate */}
+                <ProjectSpecimenPlate
+                  imageName={projects[1].imageName}
+                  title="Hyred Platform Preview"
+                  caption="Figure 3.3: Skill assessment dashboard & automated learning roadmaps."
+                  tapeColor="peach"
+                  badge="CAREER PROTOTYPE"
+                />
+
+                {/* Problem Explored Box */}
+                <div className="p-3.5 rounded bg-pastel-peachLight border-1.5 border-pastel-ink shadow-comic-sm space-y-1">
+                  <div className="flex items-center gap-1.5 font-comic text-[11px] font-bold text-pastel-peachDark uppercase">
+                    <span>✦ PROBLEM EXPLORED</span>
+                  </div>
+                  <p className="font-sans text-xs text-pastel-ink/90 leading-relaxed">
+                    {projects[1].problemExplored}
+                  </p>
+                </div>
+
+                {/* Verified Capabilities Checklist */}
+                <div className="space-y-2">
+                  <div className="font-comic text-xs font-bold uppercase tracking-wider text-pastel-inkMuted">
+                    VERIFIED IMPLEMENTATION
+                  </div>
+                  <ul className="space-y-1.5 font-sans text-xs text-pastel-ink">
+                    {projects[1].verifiedCapabilities.map((cap, i) => (
+                      <li key={i} className="flex items-start gap-2">
+                        <span className="font-bold text-pastel-peachDark mt-0.5">✓</span>
+                        <span className="leading-snug">{cap}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+
+                {/* Tech Stack Pills */}
+                <div className="space-y-2 pt-1 border-t border-pastel-ink/15">
+                  <div className="font-comic text-[11px] font-bold uppercase tracking-wider text-pastel-inkMuted">
+                    TECHNOLOGIES INVOLVED
+                  </div>
+                  <div className="flex flex-wrap gap-1.5">
+                    {projects[1].techStack.map((tech) => (
+                      <span
+                        key={tech}
+                        className="px-2.5 py-0.5 rounded-full bg-pastel-paperAlt border border-pastel-ink/40 font-mono text-[11px] text-pastel-ink font-semibold"
+                      >
+                        {tech}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Link Note */}
+                <div className="pt-2 border-t border-pastel-ink/15 font-mono text-[11px] text-pastel-inkMuted flex items-center justify-between">
+                  <span>REPOSITORY:</span>
+                  <span className="font-semibold text-pastel-ink">
+                    {projects[1].repoLabel}
+                  </span>
+                </div>
+              </div>
+            )}
+          </div>
+        </div>
+      )}
+
+      {/* ========================================================
+          FOLIO 3: Systems & Collaboration (Aromiq & Crux)
+          ======================================================== */}
+      {folioType === "systems" && projects.length >= 2 && (
+        <div className="mt-8 space-y-8">
+          {/* Section Header */}
+          <div className="space-y-1 pb-4 border-b-2 border-pastel-ink/15">
+            <span className="font-comic text-xs font-bold text-pastel-sageDark uppercase tracking-wider">
+              ★ SPREAD 3 • SYSTEMS &amp; COLLABORATION
+            </span>
+            <h2 className="font-editorial text-4xl sm:text-5xl font-normal leading-[1.08] text-pastel-ink">
+              03 — Things I Build
+            </h2>
+            <p className="font-sans text-base text-pastel-inkMuted leading-relaxed max-w-3xl">
+              {openingReflection}
+            </p>
+          </div>
+
+          {/* Two Distinct Systems Cards */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
+            {/* Project 4: Aromiq */}
+            {projects[0] && (
+              <div className="relative rounded-lg border-2 border-pastel-ink bg-white p-5 sm:p-6 shadow-comic space-y-5">
+                {/* Washi Tape Header */}
+                <div
+                  className="absolute -top-3 left-10 w-24 h-5 rounded-xs washi-tape-sage rotate-[-1deg] z-20 pointer-events-none"
+                  aria-hidden="true"
+                />
+
+                <div className="flex items-center justify-between pb-3 border-b border-pastel-ink/15 pt-1">
+                  <span className="px-2.5 py-0.5 rounded bg-pastel-sageLight border border-pastel-ink font-comic text-xs font-bold text-pastel-sageDark uppercase">
+                    ★ {projects[0].badge}
+                  </span>
+                  <span className="font-mono text-[11px] text-pastel-inkMuted font-semibold">
+                    {projects[0].projectNo}
+                  </span>
+                </div>
+
+                <div className="space-y-1.5">
+                  <h3 className="font-editorial text-2xl sm:text-3xl font-normal text-pastel-ink">
+                    {projects[0].name}
+                  </h3>
+                  <div className="font-mono text-xs font-semibold text-pastel-sageDark">
+                    STATUS: {projects[0].status}
+                  </div>
+                  <p className="font-sans text-xs sm:text-sm text-pastel-ink/90 leading-relaxed pt-1">
+                    {projects[0].purpose}
+                  </p>
+                </div>
+
+                {/* Visual Specimen Plate */}
+                <ProjectSpecimenPlate
+                  imageName={projects[0].imageName}
+                  title="Aromiq Platform Preview"
+                  caption="Figure 3.4: Restaurant menu, table ordering & MySQL backend schema."
+                  tapeColor="sage"
+                  badge="COURSEWORK SPECIMEN"
+                />
+
+                {/* Honest Distinction: Implemented vs Explored/Planned */}
+                <div className="p-3.5 rounded bg-pastel-sageLight border-1.5 border-pastel-ink shadow-comic-sm space-y-2">
+                  <div className="font-comic text-[11px] font-bold text-pastel-sageDark uppercase">
+                    ✦ FEATURE ARCHITECTURE STATUS
+                  </div>
+                  <div className="space-y-1.5 font-sans text-xs text-pastel-ink">
+                    <div>
+                      <span className="font-bold text-pastel-sageDark">✓ Implemented: </span>
+                      <span>{projects[0].implementedVsPlanned.implemented}</span>
+                    </div>
+                    <div>
+                      <span className="font-bold text-pastel-inkMuted">✦ Explored / Planned: </span>
+                      <span>{projects[0].implementedVsPlanned.planned}</span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Tech Stack Pills */}
+                <div className="space-y-2 pt-1 border-t border-pastel-ink/15">
+                  <div className="font-comic text-[11px] font-bold uppercase tracking-wider text-pastel-inkMuted">
+                    TECHNOLOGIES INVOLVED
+                  </div>
+                  <div className="flex flex-wrap gap-1.5">
+                    {projects[0].techStack.map((tech) => (
+                      <span
+                        key={tech}
+                        className="px-2.5 py-0.5 rounded-full bg-pastel-paperAlt border border-pastel-ink/40 font-mono text-[11px] text-pastel-ink font-semibold"
+                      >
+                        {tech}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Repository Button */}
+                {projects[0].repoUrl && (
+                  <div className="pt-2 border-t border-pastel-ink/15">
+                    <a
+                      href={projects[0].repoUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="w-full px-4 py-2.5 rounded-md border-2 border-pastel-ink bg-white hover:bg-pastel-sageLight text-pastel-ink shadow-comic-sm hover:shadow-comic hover:-translate-y-0.5 active:translate-y-0 font-comic text-xs font-bold transition-all flex items-center justify-between cursor-pointer"
+                    >
+                      <span>{projects[0].repoLabel}</span>
+                      <span className="font-bold text-sm">↗</span>
+                    </a>
+                  </div>
+                )}
+              </div>
+            )}
+
+            {/* Project 5: Crux */}
+            {projects[1] && (
+              <div className="relative rounded-lg border-2 border-pastel-ink bg-white p-5 sm:p-6 shadow-comic space-y-5">
+                {/* Washi Tape Header */}
+                <div
+                  className="absolute -top-3 left-10 w-24 h-5 rounded-xs washi-tape-blue rotate-[1deg] z-20 pointer-events-none"
+                  aria-hidden="true"
+                />
+
+                <div className="flex items-center justify-between pb-3 border-b border-pastel-ink/15 pt-1">
+                  <span className="px-2.5 py-0.5 rounded bg-pastel-blueLight border border-pastel-ink font-comic text-xs font-bold text-pastel-blueDark uppercase">
+                    ★ {projects[1].badge}
+                  </span>
+                  <span className="font-mono text-[11px] text-pastel-inkMuted font-semibold">
+                    {projects[1].projectNo}
+                  </span>
+                </div>
+
+                <div className="space-y-1.5">
+                  <h3 className="font-editorial text-2xl sm:text-3xl font-normal text-pastel-ink">
+                    {projects[1].name}
+                  </h3>
+                  <div className="font-mono text-xs font-semibold text-pastel-blueDark">
+                    STATUS: {projects[1].status}
+                  </div>
+                  <p className="font-sans text-xs sm:text-sm text-pastel-ink/90 leading-relaxed pt-1">
+                    {projects[1].purpose}
+                  </p>
+                </div>
+
+                {/* Visual Specimen Plate */}
+                <ProjectSpecimenPlate
+                  imageName={projects[1].imageName}
+                  title="Crux College Club Portal Preview"
+                  caption="Figure 3.5: Collaborative WordPress hub for campus club activities."
+                  tapeColor="blue"
+                  badge="COLLABORATION SPECIMEN"
+                />
+
+                {/* Team Collaboration & Personal Contribution Callout */}
+                <div className="p-3.5 rounded bg-pastel-blueLight border-1.5 border-pastel-ink shadow-comic-sm space-y-1">
+                  <div className="flex items-center gap-1.5 font-comic text-[11px] font-bold text-pastel-blueDark uppercase">
+                    <span>✦ TEAM COLLABORATION &amp; SCOPE</span>
+                  </div>
+                  <p className="font-sans text-xs text-pastel-ink/90 leading-relaxed">
+                    {projects[1].collaborationNote}
+                  </p>
+                </div>
+
+                {/* Tech Stack Pills */}
+                <div className="space-y-2 pt-1 border-t border-pastel-ink/15">
+                  <div className="font-comic text-[11px] font-bold uppercase tracking-wider text-pastel-inkMuted">
+                    TECHNOLOGIES INVOLVED
+                  </div>
+                  <div className="flex flex-wrap gap-1.5">
+                    {projects[1].techStack.map((tech) => (
+                      <span
+                        key={tech}
+                        className="px-2.5 py-0.5 rounded-full bg-pastel-paperAlt border border-pastel-ink/40 font-mono text-[11px] text-pastel-ink font-semibold"
+                      >
+                        {tech}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Status Note */}
+                <div className="pt-2 border-t border-pastel-ink/15 font-mono text-[11px] text-pastel-inkMuted flex items-center justify-between">
+                  <span>PROJECT TYPE:</span>
+                  <span className="font-semibold text-pastel-ink">
+                    {projects[1].repoLabel}
+                  </span>
+                </div>
+              </div>
+            )}
+          </div>
+
+          {/* Bottom Marginal Note (Engineering Takeaway) */}
+          {marginalNote && (
+            <div className="p-4 rounded-md border-2 border-pastel-ink bg-pastel-yellowLight shadow-comic space-y-1">
+              <div className="flex items-center gap-2 font-comic text-xs font-bold text-pastel-ink uppercase tracking-wider">
+                <span>{marginalNote.tag}</span>
+                <span className="text-pastel-peachDark">★ {marginalNote.category}</span>
+              </div>
+              <p className="font-sans text-xs sm:text-sm text-pastel-ink leading-relaxed">
+                {marginalNote.text}
+              </p>
+            </div>
+          )}
+        </div>
+      )}
+
+      {/* Running Footer Note */}
+      <footer className="mt-10 pt-4 border-t-2 border-pastel-ink/15 flex flex-col sm:flex-row items-start sm:items-center justify-between font-hand text-base text-pastel-inkMuted gap-2">
+        <div>
+          ★ Curated software projects // Recorded in personal engineering notebook
+        </div>
+        <div className="font-comic text-xs font-bold uppercase text-pastel-blueDark">
+          CH.{chapterNum} // {folioLabel}
+        </div>
+      </footer>
     </div>
   );
 }

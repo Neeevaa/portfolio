@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" width="100%" height="100%">
+  <rect width="400" height="300" fill="#e9f1f5" stroke="#2D2A28" stroke-width="4"/>
+  <rect x="20" y="20" width="360" height="260" fill="#ffffff" stroke="#2D2A28" stroke-width="2" stroke-dasharray="6 6"/>
+  
+  <!-- Crux Vector Artwork -->
+  <g transform="translate(100, 32)">
+    <!-- Club Portal Window -->
+    <rect x="15" y="15" width="170" height="105" rx="6" fill="#f7f2e7" stroke="#2D2A28" stroke-width="2.5"/>
+    <line x1="15" y1="36" x2="185" y2="36" stroke="#2D2A28" stroke-width="2"/>
+    <circle cx="28" cy="26" r="3" fill="#e8998d"/>
+    <circle cx="38" cy="26" r="3" fill="#f7df94"/>
+    <circle cx="48" cy="26" r="3" fill="#9ab89e"/>
+
+    <!-- WordPress CMS / Activity Hub Layout -->
+    <rect x="25" y="46" width="36" height="66" rx="3" fill="#7ea8be" stroke="#2D2A28" stroke-width="1.5"/>
+    <circle cx="43" cy="60" r="10" fill="#ffffff" stroke="#2D2A28" stroke-width="1.5"/>
+    <text x="43" y="65" text-anchor="middle" font-family="'Newsreader', Georgia, serif" font-size="13" font-weight="bold" fill="#2D2A28">W</text>
+    <rect x="30" y="78" width="26" height="6" rx="2" fill="#e9f1f5"/>
+    <rect x="30" y="88" width="26" height="6" rx="2" fill="#e9f1f5"/>
+    <rect x="30" y="98" width="26" height="6" rx="2" fill="#e9f1f5"/>
+
+    <!-- Content Cards & Event Announcement -->
+    <rect x="69" y="46" width="106" height="30" rx="3" fill="#ffffff" stroke="#2D2A28" stroke-width="1.5"/>
+    <rect x="76" y="52" width="70" height="7" rx="1.5" fill="#f7df94"/>
+    <line x1="76" y1="65" x2="160" y2="65" stroke="#2D2A28" stroke-width="1.5" stroke-linecap="round"/>
+
+    <rect x="69" y="82" width="106" height="30" rx="3" fill="#ffffff" stroke="#2D2A28" stroke-width="1.5"/>
+    <rect x="76" y="88" width="55" height="7" rx="1.5" fill="#e8998d"/>
+    <line x1="76" y1="101" x2="155" y2="101" stroke="#2D2A28" stroke-width="1.5" stroke-linecap="round"/>
+  </g>
+
+  <!-- Editorial Text -->
+  <text x="200" y="195" text-anchor="middle" font-family="'Newsreader', Georgia, serif" font-size="20" font-weight="600" fill="#2D2A28">CRUX CLUB PORTAL</text>
+  <text x="200" y="218" text-anchor="middle" font-family="'Caveat', cursive" font-size="16" fill="#597e93">Collaborative Student Club Portal (WordPress)</text>
+
+  <!-- Placeholder Specimen Label -->
+  <rect x="40" y="240" width="320" height="26" rx="4" fill="#f7f2e7" stroke="#2D2A28" stroke-width="1.5"/>
+  <text x="200" y="258" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="12" font-weight="bold" fill="#2D2A28">[ crux-preview.png ]</text>
+</svg>

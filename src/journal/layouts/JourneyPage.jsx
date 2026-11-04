@@ -26,29 +26,29 @@ export default function JourneyPage({ pageData, onSelectFolio, folioMap }) {
   };
 
   return (
-    <div className="relative min-h-[580px] md:min-h-[640px] p-6 sm:p-10 md:p-12 lg:p-14 select-text bg-pastel-paper text-pastel-ink paper-corner-fold overflow-hidden">
+    <div className="relative min-h-full flex flex-col justify-between p-4 sm:p-5 md:p-6 select-text bg-pastel-paper text-pastel-ink paper-corner-fold">
       {/* Decorative Washi Tape across Top Header */}
       <div
-        className="absolute -top-3 left-14 sm:left-24 w-28 sm:w-36 h-6 washi-tape-yellow rotate-[1deg] z-20 pointer-events-none"
+        className="absolute -top-3 left-10 sm:left-18 w-24 sm:w-32 h-5 washi-tape-yellow rotate-[1deg] z-20 pointer-events-none"
         aria-hidden="true"
       />
 
       {/* Header & Running Chapter Metadata Bar */}
-      <header className="flex flex-col sm:flex-row sm:items-center justify-between pb-5 border-b-2 border-pastel-ink/15 gap-3">
-        <div className="flex flex-wrap items-center gap-2.5">
+      <header className="flex flex-wrap items-center justify-between pb-2.5 border-b-2 border-pastel-ink/15 gap-2">
+        <div className="flex flex-wrap items-center gap-2">
           <span className="px-2.5 py-0.5 rounded bg-pastel-yellow border border-pastel-ink shadow-comic-sm font-comic text-xs font-bold text-pastel-ink uppercase tracking-wider">
             CHAPTER {chapterNum}
           </span>
           <span className="text-pastel-inkMuted" aria-hidden="true">/</span>
-          <span className="font-comic text-sm font-bold tracking-wide uppercase text-pastel-ink">
+          <span className="font-comic text-xs sm:text-sm font-bold tracking-wide uppercase text-pastel-ink">
             {chapterTitle}
           </span>
-          <span className="px-2 py-0.5 rounded bg-white border border-pastel-ink/40 font-mono text-[11px] text-pastel-inkMuted font-semibold">
-            {isSecondPage ? "FOLIO 06 [2/2]" : "FOLIO 05 [1/2]"}
+          <span className="px-2 py-0.5 rounded bg-white border border-pastel-ink/40 font-mono text-[10px] sm:text-[11px] text-pastel-inkMuted font-semibold">
+            {isSecondPage ? "FOLIO 05 [2/2]" : "FOLIO 04 [1/2]"}
           </span>
         </div>
 
-        <div className="flex items-center gap-2.5 font-mono text-xs text-pastel-inkMuted">
+        <div className="flex items-center gap-2 font-mono text-[10px] sm:text-xs text-pastel-inkMuted">
           <span>{date}</span>
           <span>•</span>
           <span>{location}</span>
@@ -59,7 +59,7 @@ export default function JourneyPage({ pageData, onSelectFolio, folioMap }) {
           FOLIO A: Finding My Direction
           ======================================================== */}
       {!isSecondPage && (
-        <div className="mt-8 space-y-9">
+        <div className="my-auto py-2 space-y-3 sm:space-y-4">
           {/* Main Title & Opening Reflection */}
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
             <div className="lg:col-span-7 space-y-4">
@@ -218,7 +218,7 @@ export default function JourneyPage({ pageData, onSelectFolio, folioMap }) {
           FOLIO B: Learning by Building and Participating
           ======================================================== */}
       {isSecondPage && (
-        <div className="mt-8 space-y-9">
+        <div className="my-auto py-2 space-y-3 sm:space-y-4">
           {/* Main Title & Opening Reflection */}
           <div className="space-y-4">
             <div className="space-y-1">
@@ -428,12 +428,12 @@ export default function JourneyPage({ pageData, onSelectFolio, folioMap }) {
       )}
 
       {/* Bottom Progress Divider */}
-      <footer className="mt-10 pt-5 border-t-2 border-pastel-ink/15 flex flex-col sm:flex-row items-start sm:items-center justify-between text-xs font-mono text-pastel-inkMuted gap-2">
+      <footer className="mt-auto pt-2 border-t-2 border-pastel-ink/15 flex items-center justify-between text-[11px] font-mono text-pastel-inkMuted">
         <div className="font-comic text-xs uppercase text-pastel-inkMuted font-bold">
           VOLUME 01 • CHAPTER 02
         </div>
         <div className="font-comic text-xs uppercase tracking-widest text-pastel-blueDark font-bold">
-          {isSecondPage ? "END OF CHAPTER 02 ➔ CH.03 THINGS I BUILD" : "CH.02 [1/2] ➔ TURN TO FOLIO 06"}
+          {isSecondPage ? "END OF CHAPTER 02 ➔ CH.03 THINGS I BUILD" : "CH.02 [1/2] ➔ TURN TO FOLIO 05"}
         </div>
       </footer>
     </div>

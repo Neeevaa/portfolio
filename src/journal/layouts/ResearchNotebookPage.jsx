@@ -76,37 +76,37 @@ export default function ResearchNotebookPage({ pageData }) {
   const tapeClass = washiTapes[folioType] || "washi-tape-lavender";
 
   return (
-    <div className="relative min-h-[580px] md:min-h-[640px] p-6 sm:p-10 md:p-12 lg:p-14 select-text bg-pastel-paper text-pastel-ink paper-corner-fold overflow-hidden">
+    <div className="relative min-h-full flex flex-col justify-between p-4 sm:p-5 md:p-6 select-text bg-pastel-paper text-pastel-ink paper-corner-fold">
       {/* Decorative Washi Tape across Top Header */}
       <div
-        className={`absolute -top-3 left-14 sm:left-24 w-28 sm:w-36 h-6 ${tapeClass} rotate-[-1deg] z-20 pointer-events-none`}
+        className={`absolute -top-3 left-10 sm:left-18 w-24 sm:w-32 h-5 ${tapeClass} rotate-[-1deg] z-20 pointer-events-none`}
         aria-hidden="true"
       />
 
       {/* Wire Paper Clip Accent */}
       <div
-        className="paper-clip right-8 sm:right-16 top-[-10px] pointer-events-none"
+        className="paper-clip right-6 sm:right-12 top-[-10px] pointer-events-none"
         aria-hidden="true"
       />
 
       {/* Header & Running Chapter Metadata Bar */}
-      <header className="flex flex-col sm:flex-row sm:items-center justify-between pb-5 border-b-2 border-pastel-ink/15 gap-3">
-        <div className="flex flex-wrap items-center gap-2.5">
+      <header className="flex flex-wrap items-center justify-between pb-2.5 border-b-2 border-pastel-ink/15 gap-2">
+        <div className="flex flex-wrap items-center gap-2">
           <span className="px-2.5 py-0.5 rounded bg-pastel-lavenderLight border border-pastel-ink shadow-comic-sm font-comic text-xs font-bold text-pastel-ink uppercase tracking-wider">
             CHAPTER {chapterNum}
           </span>
           <span className="text-pastel-inkMuted" aria-hidden="true">/</span>
-          <span className="font-comic text-sm font-bold tracking-wide uppercase text-pastel-ink">
+          <span className="font-comic text-xs sm:text-sm font-bold tracking-wide uppercase text-pastel-ink">
             {chapterTitle}
           </span>
           <span className="text-pastel-inkMuted hidden md:inline" aria-hidden="true">•</span>
-          <span className="font-mono text-xs uppercase text-pastel-inkMuted hidden md:inline">
+          <span className="font-mono text-[10px] sm:text-[11px] uppercase text-pastel-inkMuted hidden md:inline">
             [ {folioLabel}: {folioTitle} ]
           </span>
         </div>
 
-        <div className="flex items-center gap-2.5 font-comic text-xs text-pastel-inkMuted">
-          <span className="px-2.5 py-0.5 rounded bg-pastel-lavender border border-pastel-ink text-white font-bold shadow-comic-sm">
+        <div className="flex items-center gap-2 font-comic text-[10px] sm:text-xs text-pastel-inkMuted">
+          <span className="px-2 py-0.5 rounded bg-pastel-lavender border border-pastel-ink text-white font-bold shadow-comic-sm">
             ★ EMPIRICAL RESEARCH LOG
           </span>
           <span className="font-mono text-xs">{date}</span>
@@ -117,7 +117,7 @@ export default function ResearchNotebookPage({ pageData }) {
           FOLIO 12: Research Question, Central Motivation & 5-Theme Literature Map
           ==================================================================== */}
       {folioType === "literature" && (
-        <article className="mt-8 space-y-10">
+        <article className="flex-1 py-2 space-y-4">
           {/* Paper Title & Abstract Header */}
           <div className="space-y-4">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded bg-pastel-yellow border border-pastel-ink font-comic text-xs font-bold tracking-wider text-pastel-ink shadow-comic-sm">
@@ -322,7 +322,7 @@ export default function ResearchNotebookPage({ pageData }) {
           FOLIO 13: Proposed Empirical Evaluation Framework
           ==================================================================== */}
       {folioType === "evaluation" && (
-        <article className="mt-8 space-y-10">
+        <article className="flex-1 py-2 space-y-4">
           {/* Header & Protocol Disclaimer */}
           <div className="space-y-4">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded bg-pastel-peachLight border border-pastel-peachDark font-comic text-xs font-bold tracking-wider text-pastel-peachDark shadow-comic-sm">
@@ -532,7 +532,7 @@ export default function ResearchNotebookPage({ pageData }) {
           FOLIO 14: Research Log, Limitations & Next Steps
           ==================================================================== */}
       {folioType === "log" && (
-        <article className="mt-8 space-y-10">
+        <article className="flex-1 py-2 space-y-4">
           {/* Header & Abstract */}
           <div className="space-y-4">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded bg-pastel-sageLight border border-pastel-sageDark font-comic text-xs font-bold tracking-wider text-pastel-sageDark shadow-comic-sm">
@@ -657,7 +657,7 @@ export default function ResearchNotebookPage({ pageData }) {
               </h2>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 font-sans">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 font-sans">
               {nextSteps.map((step, idx) => (
                 <div
                   key={idx}
@@ -688,24 +688,24 @@ export default function ResearchNotebookPage({ pageData }) {
       {/* Marginalia Note as a Thought Box */}
       {marginalNote && (
         <aside
-          className="mt-10 p-5 rounded-lg border-2 border-pastel-ink bg-pastel-lavenderLight/50 shadow-comic space-y-2 relative"
+          className="mt-2 p-2.5 rounded-lg border border-pastel-ink bg-pastel-lavenderLight/50 shadow-comic-sm space-y-1 relative"
           aria-label="Marginalia note"
         >
-          <div className="flex items-center gap-2 font-comic text-xs font-bold text-pastel-ink uppercase tracking-wider">
+          <div className="flex items-center gap-2 font-comic text-[11px] font-bold text-pastel-ink uppercase tracking-wider">
             <span>{marginalNote.tag}</span>
             <span className="text-pastel-lavenderDark">★ {marginalNote.category}</span>
           </div>
-          <p className="font-hand text-lg sm:text-xl text-pastel-ink leading-snug">
+          <p className="font-hand text-sm sm:text-base text-pastel-ink leading-snug">
             &ldquo;{marginalNote.text}&rdquo;
           </p>
         </aside>
       )}
 
       {/* Chapter Folio Footer */}
-      <footer className="mt-12 pt-6 border-t-2 border-pastel-ink/15 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 font-mono text-xs text-pastel-inkMuted">
+      <footer className="mt-auto pt-2 border-t-2 border-pastel-ink/15 flex items-center justify-between font-mono text-[11px] text-pastel-inkMuted">
         <div>{footnote || `RESEARCH NOTEBOOK SPECIMEN // CHAPTER ${chapterNum}`}</div>
-        <div className="flex items-center gap-2 font-comic text-xs uppercase tracking-wider text-pastel-ink">
-          <span>DIGITAL JOURNAL &amp; ENGINEERING NOTEBOOK</span>
+        <div className="flex items-center gap-2 font-comic text-[11px] uppercase tracking-wider text-pastel-ink">
+          <span>DIGITAL JOURNAL</span>
           <span>•</span>
           <span className="font-mono text-pastel-lavenderDark font-bold">{folioLabel}</span>
         </div>

@@ -976,49 +976,71 @@ export const chaptersData = [
         limitations: [
           {
             category: "MODEL CAPACITY",
-            title: "Small Local Model Reasoning Bounds",
-            description: "Operating a 4B parameter model locally within 4 GB VRAM preserves privacy but limits reasoning capacity. Detecting subtle distributed systems concurrency hazards remains an open challenge.",
-            challenge: "Assessing performance gap between local 4B models and cloud frontier models."
+            title: "Small Local Model Capability & Context Limits",
+            description: "Operating a 4B parameter model locally within 4 GB VRAM preserves data privacy but bounds reasoning capacity and attention span. Detecting complex distributed systems concurrency hazards remains an open challenge.",
+            challenge: "Quantifying performance trade-offs between local quantized 4B models and large cloud frontier models."
           },
           {
             category: "RETRIEVAL",
-            title: "Knowledge Freshness & Index Staleness",
-            description: "Software specifications evolve rapidly during active sprints. Outdated requirement chunks can pollute retrieval prompts if re-indexing is delayed.",
-            challenge: "Developing real-time incremental re-chunking triggers on requirement mutation."
+            title: "Retrieval Quality & Knowledge Freshness",
+            description: "Software specifications evolve rapidly during active agile sprints. Outdated requirement chunks can pollute retrieval prompts if vector re-indexing is delayed or chunk boundaries split related constraints.",
+            challenge: "Implementing real-time incremental vector index invalidation and boundary-aware re-chunking."
+          },
+          {
+            category: "RELIABILITY",
+            title: "Hallucination & Unsupported Recommendations",
+            description: "Generative models can synthesize plausible but ungrounded dependencies or invent API contracts not present in the codebase. Strict source citation tags are required to prevent developer misdirection.",
+            challenge: "Enforcing hard validation rules that reject any finding lacking demonstrable source chunk provenance."
           },
           {
             category: "BENCHMARKING",
-            title: "Scarcity of Full-Lifecycle SE Benchmarks",
-            description: "Most established SE benchmarks evaluate small, single-file code completion tasks. Standardized corpora for full-lifecycle requirement-to-sprint coordination do not currently exist.",
-            challenge: "Constructing reproducible, high-quality project management test suites."
+            title: "Evaluation Reproducibility & Benchmark Scarcity",
+            description: "Most established SE benchmarks evaluate isolated code generation or single-function bugs. Standardized, reproducible corpora for full-lifecycle requirement analysis and sprint coordination do not yet exist.",
+            challenge: "Constructing and open-sourcing a curated, reproducible requirements defect benchmark."
           },
           {
-            category: "GENERALIZABILITY",
-            title: "Single-Firm Fact-Finding Constraint",
-            description: "Preliminary requirement inquiry was conducted with one regional software firm. While informative, findings provide qualitative feasibility rather than broad statistical proof.",
-            challenge: "Expanding user evaluation across multiple engineering teams and domain contexts."
+            category: "GOVERNANCE",
+            title: "Human Oversight & Engineering Accountability",
+            description: "Autonomous task creation risks polluting project backlogs with low-priority or misaligned tickets. Developers must remain ultimate arbiters with low-friction triage interfaces.",
+            challenge: "Designing workflow friction gates that prevent automated mutations without introducing reviewer fatigue."
           }
         ],
         nextSteps: [
           {
-            title: "Dataset Construction",
-            description: "Assemble an expert-reviewed testbed of software requirements with known ambiguities, omissions, and conflicts based on ISO/IEC/IEEE 29148.",
-            deliverable: "Curated Requirement Defect Corpus"
+            stepNum: "01",
+            title: "Refine Research Questions",
+            description: "Formalize sub-questions regarding context grounding sensitivity, human triage friction, and local hardware feasibility.",
+            deliverable: "Refined Research Question Specification"
           },
           {
-            title: "Controlled Evaluation",
-            description: "Execute the dual-branch comparative experiment (Condition A vs. Condition B) using local Ollama and Qwen3-4B.",
-            deliverable: "Empirical Benchmark Results"
+            stepNum: "02",
+            title: "Consolidate Literature Matrix",
+            description: "Synthesize findings across ~20 surveyed papers into a comparative matrix contrasting LLM architectures, RAG methods, and SE workflows.",
+            deliverable: "Thematic Literature Synthesis Matrix"
           },
           {
-            title: "Human Triage Study",
-            description: "Engage software development practitioners to evaluate model findings and record triage duration and cognitive load.",
-            deliverable: "Human Oversight Assessment"
+            stepNum: "03",
+            title: "Finalize Evaluation Protocol",
+            description: "Establish ISO/IEC/IEEE 29148 gold-standard requirement testbed and calibrate evaluation rubrics for human reviewers.",
+            deliverable: "Controlled Experiment Protocol"
           },
           {
-            title: "Paper Submission & Seminar",
-            description: "Consolidate empirical findings and submit research manuscript for academic conference review and departmental seminar defense.",
-            deliverable: "Final Research Paper & Presentation"
+            stepNum: "04",
+            title: "Run Controlled Comparison",
+            description: "Execute Condition A (LLM-only) vs. Condition B (RAG-assisted) evaluation under identical seeds using local quantized Qwen3-4B.",
+            deliverable: "Raw Inference & Finding Payload Logs"
+          },
+          {
+            stepNum: "05",
+            title: "Analyze Empirical Results",
+            description: "Measure defect detection sensitivity, citation fidelity, false-positive ratio, and human reviewer inspection effort.",
+            deliverable: "Comparative Benchmark Analysis Report"
+          },
+          {
+            stepNum: "06",
+            title: "Prepare Paper & Seminar Materials",
+            description: "Synthesize empirical results into the final research manuscript for academic conference submission and departmental defense.",
+            deliverable: "Final Research Paper & Presentation Slides"
           }
         ],
         marginalNote: {

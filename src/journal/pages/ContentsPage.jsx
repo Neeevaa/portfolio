@@ -3,35 +3,32 @@ import { chaptersData, chapterCategoryStyles } from "../data/journalData";
 
 export default function ContentsPage({ onSelectChapter, folioMap, currentFolioIndex }) {
   return (
-    <div className="relative min-h-[580px] md:min-h-[640px] p-6 sm:p-10 md:p-12 lg:p-14 select-text bg-pastel-paper text-pastel-ink paper-corner-fold overflow-hidden">
+    <div className="relative min-h-full flex flex-col justify-between p-4 sm:p-6 md:p-7 select-text bg-pastel-paper text-pastel-ink paper-corner-fold">
       {/* Decorative Washi Tape across Top Header */}
       <div
-        className="absolute -top-3 left-12 sm:left-20 w-28 sm:w-36 h-6 washi-tape-yellow rotate-[1deg] z-20 pointer-events-none"
+        className="absolute -top-3 left-10 sm:left-16 w-24 sm:w-32 h-5 washi-tape-yellow rotate-[1deg] z-20 pointer-events-none"
         aria-hidden="true"
       />
 
       {/* Chapter Index Header */}
-      <header className="flex flex-col sm:flex-row sm:items-end justify-between border-b-2 border-pastel-ink/20 pb-5 gap-3">
+      <header className="flex flex-wrap items-center justify-between border-b-2 border-pastel-ink/20 pb-2.5 gap-2">
         <div>
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded bg-pastel-yellow border-2 border-pastel-ink shadow-comic-sm font-hand text-sm font-bold text-pastel-ink tracking-wide">
+          <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded bg-pastel-yellow border border-pastel-ink shadow-comic-sm font-hand text-xs font-bold text-pastel-ink tracking-wide">
             <span>★ TABLE OF CONTENTS</span>
           </div>
-          <h2 className="font-editorial text-3xl sm:text-4xl md:text-5xl font-normal text-pastel-ink mt-2">
+          <h2 className="font-editorial text-2xl sm:text-3xl font-normal text-pastel-ink mt-1">
             The Journal Index
           </h2>
-          <p className="mt-1 font-sans text-xs sm:text-sm text-pastel-inkMuted">
-            Chronological field entries, built neural runtimes, empirical research, and personal observations.
-          </p>
         </div>
 
-        <div className="font-hand text-base sm:text-lg text-pastel-inkMuted flex items-center gap-1.5 self-start sm:self-end">
-          <span>Select any entry to turn to its folio</span>
+        <div className="font-hand text-xs sm:text-sm text-pastel-inkMuted flex items-center gap-1">
+          <span>Select an entry to open its folio</span>
           <span className="font-bold text-pastel-ink" aria-hidden="true">➔</span>
         </div>
       </header>
 
-      {/* Chapters Grid (Comic Panel Spreads) */}
-      <main className="mt-7 grid grid-cols-1 lg:grid-cols-2 gap-3.5 sm:gap-4.5" role="list">
+      {/* Chapters Grid (Compact 2-Column Comic Panels) */}
+      <main className="my-auto py-2 grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-2.5" role="list">
         {chaptersData.map((ch) => {
           const startingFolio = folioMap ? folioMap[ch.id] : 2;
           const totalPagesInChapter = ch.pages.length;
@@ -54,72 +51,53 @@ export default function ContentsPage({ onSelectChapter, folioMap, currentFolioIn
               key={ch.num}
               type="button"
               onClick={() => onSelectChapter(startingFolio)}
-              aria-label={`Open Chapter ${ch.num}: ${ch.title} on page ${startingFolio + 1}`}
-              className={`w-full text-left group flex items-start justify-between p-4 sm:p-4.5 rounded-lg border-2 transition-all duration-200 cursor-pointer select-none focus-visible:ring-2 focus-visible:ring-pastel-ink focus-visible:outline-none focus-visible:ring-offset-2 focus-visible:ring-offset-pastel-paper ${
+              aria-label={`Open Chapter ${ch.num}: ${ch.title} on folio ${startingFolio + 1}`}
+              className={`w-full text-left group flex items-center justify-between p-2 sm:p-2.5 rounded-md border-1.5 sm:border-2 transition-all duration-150 cursor-pointer select-none focus-visible:ring-2 focus-visible:ring-pastel-ink focus-visible:outline-none ${
                 isCurrentChapter
-                  ? "border-pastel-ink bg-pastel-yellowLight shadow-comic translate-y-[-1px]"
-                  : "border-pastel-ink bg-white shadow-comic-sm hover:shadow-comic hover:-translate-y-0.5 active:translate-y-0"
+                  ? "border-pastel-ink bg-pastel-yellowLight shadow-comic -translate-y-0.5"
+                  : "border-pastel-ink/80 bg-white shadow-comic-sm hover:shadow-comic hover:-translate-y-0.5 active:translate-y-0"
               }`}
             >
-              <div className="flex items-start gap-3.5 pr-2">
-                {/* Number Badge with Category Accent */}
+              <div className="flex items-center gap-2.5 min-w-0 pr-2">
+                {/* Number Badge */}
                 <div
-                  className={`w-9 h-9 sm:w-10 sm:h-10 rounded-full border-2 border-pastel-ink ${style.badgeBg} ${style.badgeText} flex items-center justify-center font-comic font-bold text-sm sm:text-base flex-shrink-0 shadow-comic-sm group-hover:rotate-6 transition-transform`}
+                  className={`w-7 h-7 sm:w-8 sm:h-8 rounded-full border border-pastel-ink ${style.badgeBg} ${style.badgeText} flex items-center justify-center font-comic font-bold text-xs flex-shrink-0 shadow-comic-sm`}
                   aria-hidden="true"
                 >
                   {ch.num}
                 </div>
 
-                <div className="space-y-1">
-                  <div className="flex flex-wrap items-center gap-2">
-                    <span className="font-editorial text-lg sm:text-xl font-normal text-pastel-ink group-hover:text-pastel-blueDark transition-colors">
+                <div className="min-w-0">
+                  <div className="flex items-center gap-1.5">
+                    <span className="font-editorial text-sm sm:text-base font-semibold text-pastel-ink group-hover:text-pastel-blueDark truncate transition-colors">
                       {ch.title}
                     </span>
-                    {/* Section Type Tag */}
                     <span
-                      className={`font-comic text-[10px] px-2 py-0.5 rounded border border-pastel-ink/60 ${style.accentBg} text-pastel-ink font-bold uppercase tracking-wider`}
+                      className={`font-comic text-[9px] px-1.5 py-0.2 rounded border border-pastel-ink/40 ${style.accentBg} text-pastel-ink font-bold uppercase tracking-wider hidden sm:inline`}
                     >
                       {style.sectionType}
                     </span>
-                    {totalPagesInChapter > 1 && (
-                      <span className="font-hand text-sm text-pastel-inkMuted">
-                        ({totalPagesInChapter} pages)
-                      </span>
-                    )}
                   </div>
-
-                  {/* Concise Chapter Summary */}
-                  <p className="text-xs sm:text-[13px] text-pastel-inkMuted line-clamp-2 font-sans leading-relaxed">
-                    {ch.summary || ch.subtitle}
+                  <p className="text-[11px] text-pastel-inkMuted truncate font-sans">
+                    {ch.subtitle || ch.summary}
                   </p>
                 </div>
               </div>
 
-              {/* Page Number Jump Indicator */}
-              <div className="flex items-center gap-1.5 pl-2 pt-1 flex-shrink-0">
-                <span className="font-mono text-xs font-semibold text-pastel-inkMuted">
-                  p. {String(startingFolio + 1).padStart(2, "0")}
-                </span>
-                <span
-                  className="text-pastel-ink group-hover:translate-x-1 transition-transform font-bold"
-                  aria-hidden="true"
-                >
-                  ➔
-                </span>
+              {/* Folio Indicator */}
+              <div className="flex items-center gap-1 pl-1 flex-shrink-0 font-mono text-[11px] text-pastel-inkMuted font-semibold">
+                <span>F.{String(startingFolio + 1).padStart(2, "0")}</span>
+                <span className="text-pastel-peachDark font-bold group-hover:translate-x-0.5 transition-transform">➔</span>
               </div>
             </button>
           );
         })}
       </main>
 
-      {/* Footnote Bar with Curated Count */}
-      <footer className="mt-8 pt-5 border-t-2 border-pastel-ink/20 flex flex-col sm:flex-row items-start sm:items-center justify-between text-xs font-mono text-pastel-inkMuted gap-2">
-        <div className="font-hand text-base text-pastel-inkMuted">
-          ★ All 10 chapters organized across software craft, local intelligence, and research logs.
-        </div>
-        <div className="tracking-widest uppercase">
-          [ 10 CHAPTERS • {chaptersData.reduce((acc, c) => acc + c.pages.length, 0)} TOTAL PAGES ]
-        </div>
+      {/* Index Bottom Note */}
+      <footer className="pt-2 border-t border-pastel-ink/15 flex items-center justify-between font-mono text-[11px] text-pastel-inkMuted">
+        <div>FOLIO 01 • MASTER DIRECTORY</div>
+        <div className="font-comic font-bold text-pastel-blueDark">10 RESEARCH &amp; CRAFT CHAPTERS</div>
       </footer>
     </div>
   );

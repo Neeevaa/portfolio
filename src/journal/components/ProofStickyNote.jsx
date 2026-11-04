@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useImageModal } from "../context/ImageModalContext";
 
 /**
  * ProofStickyNote
@@ -49,6 +50,20 @@ export default function ProofStickyNote({
   const svgSrc = `/assets/${imageName.replace(/\.png$/, ".svg")}`;
 
   const currentSrc = useSvgFallback ? svgSrc : pngSrc;
+
+  const { openModal } = useImageModal();
+
+  const handleOpenModal = () => {
+    if (inlineFallback) return;
+    openModal({
+      src: currentSrc,
+      alt: title,
+      title: title,
+      note: note,
+      category: category,
+      tapeColor: tapeColor,
+    });
+  };
 
   const handleImageError = () => {
     if (!useSvgFallback) {
@@ -164,16 +179,35 @@ export default function ProofStickyNote({
 
       {/* Image Preview & Placeholder Container */}
       <div
-        className={`relative w-full ${aspectRatio} rounded border-2 border-dashed border-pastel-ink/40 bg-white/95 overflow-hidden flex flex-col items-center justify-center p-2 text-center`}
+        onClick={!inlineFallback ? handleOpenModal : undefined}
+        onKeyDown={!inlineFallback ? (e) => {
+          if (e.key === "Enter" || e.key === " ") {
+            e.preventDefault();
+            handleOpenModal();
+          }
+        } : undefined}
+        tabIndex={!inlineFallback ? 0 : undefined}
+        role={!inlineFallback ? "button" : undefined}
+        aria-label={!inlineFallback ? `Click to enlarge: ${title}` : undefined}
+        className={`relative w-full ${aspectRatio} rounded border-2 border-dashed border-pastel-ink/40 bg-white/95 overflow-hidden flex flex-col items-center justify-center p-2 text-center group/proof transition-transform ${
+          !inlineFallback ? "cursor-zoom-in hover:border-pastel-ink" : ""
+        }`}
       >
         {!inlineFallback ? (
-          <img
-            src={currentSrc}
-            alt={title}
-            onError={handleImageError}
-            className="w-full h-full object-cover rounded-xs"
-            loading="lazy"
-          />
+          <>
+            <img
+              src={currentSrc}
+              alt={title}
+              onError={handleImageError}
+              className="w-full h-full object-cover rounded-xs transition-transform duration-200 group-hover/proof:scale-[1.02]"
+              loading="lazy"
+            />
+            {/* Click to expand pill badge */}
+            <div className="absolute bottom-2 right-2 px-2 py-0.5 rounded bg-white/95 border border-pastel-ink text-pastel-ink font-mono text-[9px] font-bold shadow-comic-sm opacity-0 group-hover/proof:opacity-100 transition-opacity flex items-center gap-1 select-none pointer-events-none">
+              <span>🔍</span>
+              <span>ENLARGE</span>
+            </div>
+          </>
         ) : (
           <div className="flex flex-col items-center justify-center space-y-1.5 select-none">
             {renderVectorIllustration()}

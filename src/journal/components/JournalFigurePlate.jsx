@@ -1,4 +1,5 @@
 import React from "react";
+import { useImageModal } from "../context/ImageModalContext";
 
 export default function JournalFigurePlate({
   src,
@@ -10,6 +11,21 @@ export default function JournalFigurePlate({
   aspectRatio = "aspect-[4/3]",
   tapeColor = "yellow", // "yellow" | "blue" | "peach" | "sage"
 }) {
+  const { openModal } = useImageModal();
+
+  const handleOpenModal = () => {
+    if (!src) return;
+    openModal({
+      src,
+      alt,
+      title: alt,
+      caption,
+      tag,
+      category: tag,
+      tapeColor,
+    });
+  };
+
   const getTapeClass = () => {
     switch (tapeColor) {
       case "blue":
@@ -34,15 +50,34 @@ export default function JournalFigurePlate({
 
       {/* Comic Frame Body */}
       <div
-        className={`relative w-full ${aspectRatio} rounded-sm overflow-hidden border border-pastel-ink/40 bg-pastel-paperAlt flex flex-col items-center justify-center`}
+        onClick={src ? handleOpenModal : undefined}
+        onKeyDown={src ? (e) => {
+          if (e.key === "Enter" || e.key === " ") {
+            e.preventDefault();
+            handleOpenModal();
+          }
+        } : undefined}
+        tabIndex={src ? 0 : undefined}
+        role={src ? "button" : undefined}
+        aria-label={src ? `Click to enlarge: ${alt}` : undefined}
+        className={`relative w-full ${aspectRatio} rounded-sm overflow-hidden border border-pastel-ink/40 bg-pastel-paperAlt flex flex-col items-center justify-center ${
+          src ? "cursor-zoom-in hover:border-pastel-ink" : ""
+        }`}
       >
         {src ? (
-          <img
-            src={src}
-            alt={alt}
-            className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-[1.02]"
-            loading="lazy"
-          />
+          <>
+            <img
+              src={src}
+              alt={alt}
+              className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-[1.02]"
+              loading="lazy"
+            />
+            {/* Click to expand pill badge */}
+            <div className="absolute bottom-2 right-2 px-2 py-0.5 rounded bg-white/95 border border-pastel-ink text-pastel-ink font-mono text-[9px] font-bold shadow-comic-sm opacity-0 group-hover:opacity-100 transition-opacity flex items-center gap-1 select-none pointer-events-none">
+              <span>🔍</span>
+              <span>ENLARGE</span>
+            </div>
+          </>
         ) : (
           /* Editorial Comic & Diary Illustration Placeholder */
           <div className="relative w-full h-full flex flex-col items-center justify-center p-4">

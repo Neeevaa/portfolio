@@ -61,8 +61,14 @@
   border: 2px solid var(--ink-primary);
   box-shadow: 
     4px 5px 0px var(--ink-primary),
-    0 20px 40px -10px rgba(70, 60, 50, 0.12);
+    7px 7px 0px #F7F2E7,
+    8px 8px 0px var(--ink-primary),
+    11px 11px 0px #F4EFE6,
+    12px 12px 0px rgba(45, 42, 40, 0.22),
+    0 24px 48px -12px rgba(70, 60, 50, 0.22);
   position: relative;
+  perspective: 2200px;
+  transform-style: preserve-3d;
 }
 
 /* Comic Panel Box */
@@ -201,20 +207,441 @@
   background: #688fa8;
 }
 
-/* Subtle Book Spine Gutter Line */
+/* Subtle Book Spine Gutter Line & Realistic Crease */
 .journal-gutter-pastel {
   position: absolute;
   top: 0;
   bottom: 0;
   left: 28px;
-  width: 2px;
-  background: linear-gradient(to bottom, 
-    transparent 0%, 
-    rgba(45, 42, 40, 0.12) 15%, 
-    rgba(45, 42, 40, 0.12) 85%, 
-    transparent 100%
+  width: 4px;
+  background: linear-gradient(to right, 
+    rgba(45, 42, 40, 0.16) 0%, 
+    rgba(45, 42, 40, 0.08) 35%, 
+    rgba(255, 255, 255, 0.35) 65%, 
+    rgba(45, 42, 40, 0.12) 100%
   );
+  border-right: 1px dashed rgba(45, 42, 40, 0.18);
   pointer-events: none;
+  z-index: 30;
+}
+
+/* Page Stack Depth at Right Edge */
+.journal-diary-book::after {
+  content: "";
+  position: absolute;
+  top: 6px;
+  bottom: 6px;
+  right: -5px;
+  width: 4px;
+  background: repeating-linear-gradient(to bottom,
+    #ded6c3 0px,
+    #ded6c3 1px,
+    #F7F2E7 1.5px,
+    #F7F2E7 3px
+  );
+  border-right: 1.5px solid var(--ink-primary);
+  border-top: 1px solid var(--ink-primary);
+  border-bottom: 1px solid var(--ink-primary);
+  border-radius: 0 2px 2px 0;
+  pointer-events: none;
+  z-index: 10;
+}
+
+/* ==================================================
+   REALISTIC DUAL-SPREAD 3D BOOK & PAGE-FLIP ENGINE
+   ================================================== */
+
+.book-perspective-wrapper {
+  perspective: 2600px;
+  perspective-origin: 50% 50%;
+  transform-style: preserve-3d;
+}
+
+/* Standalone Front Cover Hardcover Chassis (Closed Book View) */
+.book-standalone-cover-shell {
+  position: relative;
+  width: 100%;
+  max-width: 840px;
+  height: 100%;
+  margin: 0 auto;
+  border-radius: 10px;
+  background: #36312D;
+  padding: 6px;
+  border: 2.5px solid var(--ink-primary);
+  box-shadow: 
+    0 20px 40px -10px rgba(45, 42, 40, 0.45),
+    0 6px 14px rgba(0, 0, 0, 0.2),
+    5px 5px 0px var(--ink-primary);
+  display: flex;
+  flex-direction: column;
+  transform-style: preserve-3d;
+}
+
+/* Left Spine Edge of Closed Book */
+.book-closed-spine-left {
+  position: absolute;
+  top: 6px;
+  bottom: 6px;
+  left: 6px;
+  width: 20px;
+  background: linear-gradient(to right,
+    rgba(45, 42, 40, 0.35) 0%,
+    rgba(214, 202, 183, 0.7) 40%,
+    rgba(255, 255, 255, 0.4) 60%,
+    rgba(45, 42, 40, 0.15) 100%
+  );
+  border-right: 1.5px solid var(--ink-primary);
+  border-radius: 4px 0 0 4px;
+  z-index: 25;
+  pointer-events: none;
+}
+
+/* Open Book Hardcover Chassis */
+.book-open-hardcover {
+  position: relative;
+  background: #36312D;
+  padding: 6px;
+  border-radius: 10px;
+  border: 2.5px solid var(--ink-primary);
+  box-shadow: 
+    0 20px 42px -10px rgba(45, 42, 40, 0.45),
+    0 6px 14px rgba(0, 0, 0, 0.2),
+    5px 5px 0px var(--ink-primary);
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+}
+
+/* Realistic Edge Stack Layers */
+.book-pages-stack-left {
+  position: absolute;
+  top: 10px;
+  bottom: 10px;
+  left: 3px;
+  width: 4px;
+  background: repeating-linear-gradient(to bottom, #ded6c3 0px, #ded6c3 1px, #F7F2E7 1.5px, #F7F2E7 3px);
+  border-left: 1.5px solid var(--ink-primary);
+  border-radius: 2px 0 0 2px;
+  z-index: 10;
+  pointer-events: none;
+}
+
+.book-pages-stack-right {
+  position: absolute;
+  top: 10px;
+  bottom: 10px;
+  right: 3px;
+  width: 4px;
+  background: repeating-linear-gradient(to bottom, #ded6c3 0px, #ded6c3 1px, #F7F2E7 1.5px, #F7F2E7 3px);
+  border-right: 1.5px solid var(--ink-primary);
+  border-radius: 0 2px 2px 0;
+  z-index: 10;
+  pointer-events: none;
+}
+
+/* Open Book Dual-Page Stage */
+.book-spread-stage {
+  position: relative;
+  flex: 1;
+  display: flex;
+  width: 100%;
+  height: 100%;
+  perspective: 2600px;
+  perspective-origin: 50% 50%;
+  transform-style: preserve-3d;
+  overflow: hidden;
+  border-radius: 6px;
+  background: var(--paper-ivory);
+  border: 2px solid var(--ink-primary);
+}
+
+/* Left & Right Spread Page Halves */
+.book-page-half-left,
+.book-page-half-right {
+  position: relative;
+  width: 50%;
+  min-height: 100%;
+  height: auto;
+  background-color: var(--paper-ivory);
+}
+
+.book-page-half-left {
+  border-right: 1px solid rgba(45, 42, 40, 0.15);
+}
+
+.book-page-half-right {
+  border-left: 1px solid rgba(45, 42, 40, 0.15);
+}
+
+/* Unified Single Spread Scroll Container */
+.book-spread-scroll {
+  width: 100%;
+  height: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(45, 42, 40, 0.3) transparent;
+  scroll-behavior: smooth;
+}
+
+.book-spread-scroll::-webkit-scrollbar {
+  width: 6px;
+}
+
+.book-spread-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.book-spread-scroll::-webkit-scrollbar-thumb {
+  background: rgba(45, 42, 40, 0.25);
+  border-radius: 6px;
+}
+
+.book-spread-scroll::-webkit-scrollbar-thumb:hover {
+  background: rgba(45, 42, 40, 0.45);
+}
+
+/* Smooth Scrollable Container for each Page */
+.book-page-scroll {
+  height: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(45, 42, 40, 0.2) transparent;
+}
+
+.book-page-scroll::-webkit-scrollbar {
+  width: 4px;
+}
+
+.book-page-scroll::-webkit-scrollbar-thumb {
+  background: rgba(45, 42, 40, 0.2);
+  border-radius: 4px;
+}
+
+/* Center Spine Hinge Valley & Binding Stitches */
+.book-spine-hinge {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 32px;
+  transform: translateX(-50%);
+  background: linear-gradient(to right,
+    rgba(45, 42, 40, 0.22) 0%,
+    rgba(45, 42, 40, 0.06) 35%,
+    rgba(255, 255, 255, 0.45) 50%,
+    rgba(45, 42, 40, 0.06) 65%,
+    rgba(45, 42, 40, 0.22) 100%
+  );
+  border-left: 1px dashed rgba(45, 42, 40, 0.2);
+  border-right: 1px dashed rgba(45, 42, 40, 0.2);
+  z-index: 30;
+  pointer-events: none;
+}
+
+/* Spine Shadow on Inner Left/Right Margins */
+.book-page-spine-shadow-left {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  width: 32px;
+  background: linear-gradient(to left, rgba(45, 42, 40, 0.18) 0%, rgba(45, 42, 40, 0.04) 60%, transparent 100%);
+  pointer-events: none;
+  z-index: 20;
+}
+
+.book-page-spine-shadow-right {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 32px;
+  background: linear-gradient(to right, rgba(45, 42, 40, 0.18) 0%, rgba(45, 42, 40, 0.04) 60%, transparent 100%);
+  pointer-events: none;
+  z-index: 20;
+}
+
+/* 3D Turning Leaf for Forward Page Flip (Right flips over to Left) */
+.book-leaf-forward {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 50%;
+  transform-origin: left center;
+  transform-style: preserve-3d;
+  z-index: 35;
+  pointer-events: none;
+  animation: bookSpreadFlipForward 560ms cubic-bezier(0.25, 1, 0.5, 1) forwards;
+}
+
+/* 3D Turning Leaf for Backward Page Flip (Left flips over to Right) */
+.book-leaf-backward {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 50%;
+  transform-origin: right center;
+  transform-style: preserve-3d;
+  z-index: 35;
+  pointer-events: none;
+  animation: bookSpreadFlipBackward 560ms cubic-bezier(0.25, 1, 0.5, 1) forwards;
+}
+
+/* Front & Back Faces of the 3D Turning Leaf */
+.book-leaf-side {
+  position: absolute;
+  inset: 0;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  background-color: var(--paper-ivory);
+  overflow: hidden;
+}
+
+.book-leaf-side-front {
+  transform: rotateY(0deg);
+}
+
+.book-leaf-side-back {
+  transform: rotateY(180deg);
+  background-color: var(--paper-ivory);
+  border-left: 2px solid var(--ink-primary);
+}
+
+/* Paper Lighting Effect while Turning */
+.book-leaf-lighting {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 15;
+  background: linear-gradient(110deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.45) 35%,
+    rgba(45, 42, 40, 0.12) 55%,
+    rgba(45, 42, 40, 0.35) 100%
+  );
+  opacity: 0.65;
+}
+
+/* Underlay Shadows revealed underneath flipping page */
+.book-spread-underlay-right {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 25;
+  background: linear-gradient(to right,
+    rgba(45, 42, 40, 0.38) 0%,
+    rgba(45, 42, 40, 0.12) 30%,
+    transparent 60%
+  );
+  animation: spreadUnderlayFade 560ms ease-in-out forwards;
+}
+
+.book-spread-underlay-left {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 25;
+  background: linear-gradient(to left,
+    rgba(45, 42, 40, 0.38) 0%,
+    rgba(45, 42, 40, 0.12) 30%,
+    transparent 60%
+  );
+  animation: spreadUnderlayFade 560ms ease-in-out forwards;
+}
+
+@keyframes spreadUnderlayFade {
+  0% { opacity: 0; }
+  35% { opacity: 0.7; }
+  100% { opacity: 0; }
+}
+
+@keyframes bookSpreadFlipForward {
+  0% {
+    transform: rotateY(0deg) skewY(0deg);
+    filter: drop-shadow(0px 0px 0px rgba(45, 42, 40, 0));
+  }
+  30% {
+    transform: rotateY(-50deg) skewY(-1.8deg) scaleY(0.994);
+    filter: drop-shadow(-14px 8px 22px rgba(45, 42, 40, 0.35));
+  }
+  65% {
+    transform: rotateY(-130deg) skewY(-1deg) scaleY(0.994);
+    filter: drop-shadow(-22px 6px 28px rgba(45, 42, 40, 0.28));
+  }
+  100% {
+    transform: rotateY(-180deg) skewY(0deg) scaleY(1);
+    filter: drop-shadow(0px 0px 0px rgba(45, 42, 40, 0));
+  }
+}
+
+@keyframes bookSpreadFlipBackward {
+  0% {
+    transform: rotateY(0deg) skewY(0deg);
+    filter: drop-shadow(0px 0px 0px rgba(45, 42, 40, 0));
+  }
+  35% {
+    transform: rotateY(50deg) skewY(1.8deg) scaleY(0.994);
+    filter: drop-shadow(14px 8px 22px rgba(45, 42, 40, 0.35));
+  }
+  70% {
+    transform: rotateY(130deg) skewY(1deg) scaleY(0.994);
+    filter: drop-shadow(22px 6px 28px rgba(45, 42, 40, 0.28));
+  }
+  100% {
+    transform: rotateY(180deg) skewY(0deg) scaleY(1);
+    filter: drop-shadow(0px 0px 0px rgba(45, 42, 40, 0));
+  }
+}
+
+/* Subtle Interactive Page-Turn Corner Hint */
+.book-page-turn-hint {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 26px;
+  height: 26px;
+  background: linear-gradient(135deg, transparent 50%, rgba(45, 42, 40, 0.08) 50%, rgba(45, 42, 40, 0.2) 100%);
+  clip-path: polygon(100% 0, 100% 100%, 0 100%);
+  cursor: pointer;
+  transition: all 0.25s ease;
+  z-index: 25;
+}
+
+.book-page-turn-hint:hover {
+  width: 36px;
+  height: 36px;
+  background: linear-gradient(135deg, transparent 50%, var(--pastel-yellow) 50%, var(--pastel-yellow-dark) 100%);
+}
+
+/* Modal Lightbox Keyframes */
+@keyframes modalFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes modalPopIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.95) translateY(10px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.animate-fadeIn {
+  animation: modalFadeIn 180ms ease-out forwards;
+}
+
+.animate-modalPop {
+  animation: modalPopIn 240ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 /* Page Transitions (Smooth Slide & Paper Lift) */

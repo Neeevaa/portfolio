@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useImageModal } from "../context/ImageModalContext";
 
 /**
  * Tactical Specimen Image component with PNG -> SVG -> Vector fallback
@@ -15,6 +16,7 @@ function ProjectSpecimenPlate({
 }) {
   const [useSvg, setUseSvg] = useState(false);
   const [inlineFallback, setInlineFallback] = useState(false);
+  const { openModal } = useImageModal();
 
   const tapeClasses = {
     yellow: "washi-tape-yellow",
@@ -26,6 +28,18 @@ function ProjectSpecimenPlate({
   const pngSrc = `/assets/${imageName}`;
   const svgSrc = `/assets/${imageName.replace(/\.png$/, ".svg")}`;
   const currentSrc = useSvg ? svgSrc : pngSrc;
+
+  const handleOpenModal = () => {
+    if (inlineFallback) return;
+    openModal({
+      src: currentSrc,
+      alt: title,
+      title: title,
+      caption: caption,
+      category: badge,
+      tapeColor: tapeColor,
+    });
+  };
 
   const handleImageError = () => {
     if (!useSvg) {
@@ -47,16 +61,35 @@ function ProjectSpecimenPlate({
 
       {/* Frame Container */}
       <div
-        className={`relative w-full ${aspectRatio} rounded-sm overflow-hidden border border-pastel-ink/40 bg-pastel-paperAlt flex flex-col items-center justify-center`}
+        onClick={!inlineFallback ? handleOpenModal : undefined}
+        onKeyDown={!inlineFallback ? (e) => {
+          if (e.key === "Enter" || e.key === " ") {
+            e.preventDefault();
+            handleOpenModal();
+          }
+        } : undefined}
+        tabIndex={!inlineFallback ? 0 : undefined}
+        role={!inlineFallback ? "button" : undefined}
+        aria-label={!inlineFallback ? `Click to enlarge: ${title}` : undefined}
+        className={`relative w-full ${aspectRatio} rounded-sm overflow-hidden border border-pastel-ink/40 bg-pastel-paperAlt flex flex-col items-center justify-center group/projplate transition-colors ${
+          !inlineFallback ? "cursor-zoom-in hover:border-pastel-ink" : ""
+        }`}
       >
         {!inlineFallback ? (
-          <img
-            src={currentSrc}
-            alt={title}
-            onError={handleImageError}
-            className="w-full h-full object-cover transition-transform duration-300 hover:scale-[1.02]"
-            loading="lazy"
-          />
+          <>
+            <img
+              src={currentSrc}
+              alt={title}
+              onError={handleImageError}
+              className="w-full h-full object-cover transition-transform duration-300 group-hover/projplate:scale-[1.02]"
+              loading="lazy"
+            />
+            {/* Click to expand pill badge */}
+            <div className="absolute bottom-2 right-2 px-2 py-0.5 rounded bg-white/95 border border-pastel-ink text-pastel-ink font-mono text-[9px] font-bold shadow-comic-sm opacity-0 group-hover/projplate:opacity-100 transition-opacity flex items-center gap-1 select-none pointer-events-none">
+              <span>🔍</span>
+              <span>ENLARGE</span>
+            </div>
+          </>
         ) : (
           <div className="flex flex-col items-center justify-center p-4 text-center space-y-2">
             <div className="w-12 h-12 rounded-full border-2 border-dashed border-pastel-ink/40 bg-white flex items-center justify-center text-pastel-inkMuted">
@@ -126,29 +159,29 @@ export default function ProjectShowcasePage({ pageData, onSelectFolio, folioMap 
   };
 
   return (
-    <div className="relative min-h-[580px] md:min-h-[640px] p-6 sm:p-10 md:p-12 lg:p-14 select-text bg-pastel-paper text-pastel-ink paper-corner-fold overflow-hidden">
+    <div className="relative min-h-full flex flex-col justify-between p-4 sm:p-5 md:p-6 select-text bg-pastel-paper text-pastel-ink paper-corner-fold">
       {/* Decorative Washi Tape across Top Header */}
       <div
-        className="absolute -top-3 left-14 sm:left-24 w-28 sm:w-36 h-6 washi-tape-blue rotate-[1deg] z-20 pointer-events-none"
+        className="absolute -top-3 left-10 sm:left-18 w-24 sm:w-32 h-5 washi-tape-blue rotate-[1deg] z-20 pointer-events-none"
         aria-hidden="true"
       />
 
       {/* Header & Running Chapter Metadata Bar */}
-      <header className="flex flex-col sm:flex-row sm:items-center justify-between pb-5 border-b-2 border-pastel-ink/15 gap-3">
-        <div className="flex flex-wrap items-center gap-2.5">
+      <header className="flex flex-wrap items-center justify-between pb-2.5 border-b-2 border-pastel-ink/15 gap-2">
+        <div className="flex flex-wrap items-center gap-2">
           <span className="px-2.5 py-0.5 rounded bg-pastel-blueLight border border-pastel-ink shadow-comic-sm font-comic text-xs font-bold text-pastel-ink uppercase tracking-wider">
             CHAPTER {chapterNum}
           </span>
           <span className="text-pastel-inkMuted" aria-hidden="true">/</span>
-          <span className="font-comic text-sm font-bold tracking-wide uppercase text-pastel-ink">
+          <span className="font-comic text-xs sm:text-sm font-bold tracking-wide uppercase text-pastel-ink">
             {chapterTitle}
           </span>
-          <span className="px-2 py-0.5 rounded bg-white border border-pastel-ink/40 font-mono text-[11px] text-pastel-inkMuted font-semibold">
+          <span className="px-2 py-0.5 rounded bg-white border border-pastel-ink/40 font-mono text-[10px] sm:text-[11px] text-pastel-inkMuted font-semibold">
             {folioLabel}
           </span>
         </div>
 
-        <div className="flex items-center gap-2.5 font-mono text-xs text-pastel-inkMuted">
+        <div className="flex items-center gap-2 font-mono text-[10px] sm:text-xs text-pastel-inkMuted">
           <span>{date}</span>
           <span>•</span>
           <span>{location}</span>
@@ -159,7 +192,7 @@ export default function ProjectShowcasePage({ pageData, onSelectFolio, folioMap 
           FOLIO 1: The Workbench (Opening Spread & Synapse Flagship)
           ======================================================== */}
       {folioType === "workbench" && flagship && (
-        <div className="mt-8 space-y-8">
+        <div className="my-auto py-2 space-y-3 sm:space-y-4">
           {/* Chapter Title & Opening Workbench Manifesto */}
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
             <div className="lg:col-span-7 space-y-3">
@@ -345,7 +378,7 @@ export default function ProjectShowcasePage({ pageData, onSelectFolio, folioMap 
           FOLIO 2: Experiments & Applications (Veritas Vision & Hyred)
           ======================================================== */}
       {folioType === "experiments" && projects.length >= 2 && (
-        <div className="mt-8 space-y-8">
+        <div className="my-auto py-2 space-y-3 sm:space-y-4">
           {/* Section Header */}
           <div className="space-y-1 pb-4 border-b-2 border-pastel-ink/15">
             <span className="font-comic text-xs font-bold text-pastel-lavenderDark uppercase tracking-wider">
@@ -550,7 +583,7 @@ export default function ProjectShowcasePage({ pageData, onSelectFolio, folioMap 
           FOLIO 3: Systems & Collaboration (Aromiq & Crux)
           ======================================================== */}
       {folioType === "systems" && projects.length >= 2 && (
-        <div className="mt-8 space-y-8">
+        <div className="my-auto py-2 space-y-3 sm:space-y-4">
           {/* Section Header */}
           <div className="space-y-1 pb-4 border-b-2 border-pastel-ink/15">
             <span className="font-comic text-xs font-bold text-pastel-sageDark uppercase tracking-wider">
@@ -749,11 +782,11 @@ export default function ProjectShowcasePage({ pageData, onSelectFolio, folioMap 
       )}
 
       {/* Running Footer Note */}
-      <footer className="mt-10 pt-4 border-t-2 border-pastel-ink/15 flex flex-col sm:flex-row items-start sm:items-center justify-between font-hand text-base text-pastel-inkMuted gap-2">
+      <footer className="mt-auto pt-2 border-t-2 border-pastel-ink/15 flex items-center justify-between font-hand text-xs sm:text-sm text-pastel-inkMuted">
         <div>
           ★ Curated software projects // Recorded in personal engineering notebook
         </div>
-        <div className="font-comic text-xs font-bold uppercase text-pastel-blueDark">
+        <div className="font-comic text-[11px] font-bold uppercase text-pastel-blueDark">
           CH.{chapterNum} // {folioLabel}
         </div>
       </footer>

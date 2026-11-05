@@ -4,6 +4,7 @@ import DiaryTextPage from "./DiaryTextPage";
 import ProjectShowcasePage from "./ProjectShowcasePage";
 import TechnicalCaseStudyPage from "./TechnicalCaseStudyPage";
 import ResearchNotebookPage from "./ResearchNotebookPage";
+import ExperienceCommunityPage from "./ExperienceCommunityPage";
 import TechnicalIndexPage from "./TechnicalIndexPage";
 import PhotoPersonalPage from "./PhotoPersonalPage";
 import ClosingContactPage from "./ClosingContactPage";
@@ -43,6 +44,9 @@ export default function JournalPageRenderer({ pageData, onSelectFolio, folioMap 
       );
     case "research":
       return <ResearchNotebookPage pageData={pageData} />;
+    case "experience":
+    case "experience-community":
+      return <ExperienceCommunityPage pageData={pageData} />;
     case "toolkit":
       return <TechnicalIndexPage pageData={pageData} />;
     case "personal":

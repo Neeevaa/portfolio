@@ -1055,45 +1055,214 @@ export const chaptersData = [
   {
     id: "experience",
     num: "06",
-    title: "EXPERIENCE",
-    subtitle: "Internships, professional engagements, and shipped production code",
-    summary: "Practical software engineering tenures, production responsibilities, and team collaboration.",
-    date: "2023 — PRESENT",
-    tag: "TRACK RECORD",
+    title: "EXPERIENCE & COMMUNITY",
+    subtitle: "Where engineering meets people, coordination, and collaboration",
+    summary: "Industry internships in applied machine learning and incubator administration, large-scale NASA hackathon venue lead operations, GDG community management, and AI school outreach.",
+    date: "2024 — PRESENT",
+    tag: "COMMUNITY",
     pages: [
       {
         id: "experience-p1",
-        layoutType: "timeline",
+        layoutType: "experience-community",
+        folioType: "professional",
         chapterNum: "06",
-        chapterTitle: "EXPERIENCE",
-        headline: "Professional Tenures & Engineering Practice",
-        date: "CHRONOLOGY // ROLES & RESPONSIBILITIES",
-        entryNo: "RECORD 06.1",
-        summary: "Practical software roles centered on backend reliability, AI integration, and performant user interfaces.",
-        milestones: [
+        chapterTitle: "EXPERIENCE & COMMUNITY",
+        folioLabel: "FOLIO 15",
+        folioTitle: "Professional Experience",
+        headline: "Professional Tenures: Applied ML & Incubator Operations",
+        subtitle: "Grounded industry exposure spanning applied machine learning algorithms at Infopark, Kochi and startup incubation administration at Startups Valley TBI.",
+        date: "JULY 2026 & MARCH 2026 — PRESENT",
+        roles: [
           {
-            period: "2024 — 2025",
-            role: "Software Engineering Intern / Applied ML",
-            institution: "Technology Labs & Development Teams",
-            description: "Developed and shipped modular backend microservices, optimized database query execution plans, and integrated automated testing workflows across production repositories.",
-            tag: "INDUSTRY",
-            details: ["FastAPI & Node services", "PostgreSQL tuning", "Automated CI/CD pipelines"]
+            company: "TechTaliya Informatics (P) Ltd.",
+            officialTitle: "Intern",
+            tenure: "July 2026 • 1 Month",
+            location: "Thapasya, Infopark, Kochi",
+            mode: "In-Person (Offline)",
+            badge: "APPLIED ML & ENGINEERING",
+            overview: "Intensive offline internship providing practical exposure to core machine-learning algorithms, exploratory data analysis, neural-network fundamentals, and observation of production AI chatbot systems.",
+            responsibilities: [
+              "Studied and implemented machine-learning algorithms and neural-network fundamentals using scikit-learn, NumPy, pandas, and Matplotlib.",
+              "Wrote Python and JavaScript scripts for dataset preprocessing, feature scaling, and visualization.",
+              "Observed and analyzed the company's in-production customer chatbot and retrieval-augmented generation (RAG) workflow to understand context grounding and retrieval pipelines."
+            ],
+            learningTakeaway: "Observed how production teams architect RAG retrieval pipelines and validate outputs against live knowledge bases, reinforcing the necessity of strict tenant context isolation.",
+            skills: ["Python", "JavaScript", "scikit-learn", "NumPy", "pandas", "Matplotlib", "ML Fundamentals", "RAG Observation"],
+            proofSpecimen: {
+              imageName: "techtaliya-internship.png",
+              title: "TechTaliya Internship",
+              category: "INDUSTRY EXPOSURE",
+              note: "In-person exposure at Thapasya, Infopark Kochi (July 2026)"
+            }
           },
           {
-            period: "2023 — 2024",
-            role: "Technical Contributor & Open Source Developer",
-            institution: "Community Collaborations",
-            description: "Authored reusable components, refined developer documentation, and fixed runtime concurrency issues in distributed open-source tools.",
-            tag: "CONTRIBUTIONS",
-            details: ["Code review & refactoring", "WebSocket clients", "Documentation standards"]
+            company: "INCIAL Startups Valley TBI",
+            officialTitle: "Administrative Intern",
+            tenure: "March 2026 — Present",
+            location: "Startups Valley TBI, Amal Jyothi College of Engineering",
+            mode: "Hybrid",
+            badge: "INCUBATOR OPERATIONS",
+            overview: "Administrative and operational support for an on-campus technology business incubator, facilitating documentation, founder interactions, and incubator communications.",
+            responsibilities: [
+              "Drafted, formatted, and archived institutional documentation, recommendation letters, official annexures, and event certificates.",
+              "Coordinated social media updates, promotional announcements, and content assets across incubator channels.",
+              "Engaged with early-stage student founders, gathered operational requirements, shared product ideas, and supported day-to-day administrative coordination."
+            ],
+            learningTakeaway: "Gained direct insight into startup incubation, developing organizational discipline and clear stakeholder communication.",
+            skills: ["Technical Documentation", "Institutional Annexures", "Founder Interaction", "Startup Operations", "Event Coordination", "Community Outreach"]
           }
         ],
         marginalNote: {
-          tag: "TENURE NOTE",
+          tag: "PRACTICE INQUIRY",
           category: "LEARNING",
-          text: "Writing code that other developers can read and maintain under pressure is the hallmark of real craftsmanship."
+          text: "Observing real production workflows showed me that engineering maturity isn't just about writing algorithms—it's about how cleanly systems are documented, tested, and maintained under real organizational constraints."
         },
-        footnote: "[6] Verifiable references and project recommendations available upon inquiry."
+        footnote: "[1] Internships verified via official institutional documentation at Amal Jyothi College of Engineering and TechTaliya Informatics."
+      },
+      {
+        id: "experience-p2",
+        layoutType: "experience-community",
+        folioType: "leadership",
+        chapterNum: "06",
+        chapterTitle: "EXPERIENCE & COMMUNITY",
+        folioLabel: "FOLIO 16",
+        folioTitle: "Leadership & Event Operations",
+        headline: "Leadership, Venue Management & Event Coordination",
+        subtitle: "Directing high-capacity hackathon logistics for 1,000+ participants, developer community chapters, and hands-on technical bootcamps.",
+        date: "OCTOBER 2024 — PRESENT",
+        leadRoles: [
+          {
+            event: "NASA Space Apps Challenge 2025",
+            role: "Venue Management Team Lead",
+            period: "October 2025",
+            institution: "Amal Jyothi College of Engineering",
+            scale: "1,000+ Participants • National Hackathon",
+            badge: "LARGE-SCALE OPERATIONS",
+            summary: "Headed on-ground venue management and logistics for the world's largest annual space & science hackathon at the Kerala host center.",
+            highlights: [
+              "Led the venue management operations team, planning physical layouts, laboratory allocations, and power infrastructure for over 1,000 registered participants.",
+              "Coordinated cross-functional volunteer teams across registration desks, mentor lounges, presentation stages, and overnight hackathon facilities.",
+              "Maintained real-time crowd management and issue resolution throughout the continuous 48-hour event window."
+            ],
+            proofSpecimen: {
+              imageName: "nasa-space-apps-lead.png",
+              title: "NASA Space Apps 2025 Lead",
+              category: "VENUE MANAGEMENT",
+              note: "Headed logistics for 1,000+ participants (Oct 2025)"
+            }
+          },
+          {
+            event: "Google Developer Groups (GDG) on Campus",
+            institution: "Amal Jyothi College of Engineering",
+            period: "October 2024 — October 2026",
+            badge: "DEVELOPER ECOSYSTEM",
+            summary: "Active organizer across two distinct tenures driving developer workshops, hackathons, and cloud learning cohorts.",
+            subRoles: [
+              {
+                title: "Event Manager",
+                dates: "October 2024 — August 2025",
+                focus: "Venue scouting, scheduling, crowd coordination, and operations for flagship events including 'Build with AI 2025', 'Google Solutions Challenge Bootcamp', and 'Hacktoberfest 2024'."
+              },
+              {
+                title: "Google Cloud Facilitator & Cloud Manager",
+                dates: "September 2025 — October 2026",
+                focus: "Facilitated Google Cloud Study Jams cohorts, delivered hands-on GCP console demonstrations, and assisted peers in deploying web application workloads."
+              }
+            ],
+            proofSpecimen: {
+              imageName: "community-workshop-gdg.png",
+              title: "GDG Community Facilitation",
+              category: "TECHNICAL WORKSHOPS",
+              note: "Hosting Study Jams & developer bootcamps"
+            }
+          }
+        ],
+        otherContributions: [
+          {
+            title: "GTech MuLearn Media Lead",
+            period: "September 2024 — January 2026",
+            scope: "MuFest 2025, React Hands-On Workshop, No-Code Bootcamp",
+            desc: "Produced technical event coverage, managed social media handles, recorded high-engagement reels, and captured speaker sessions."
+          },
+          {
+            title: "Google Solutions Challenge Bootcamp Support",
+            period: "March 2025",
+            scope: "Kanjirappally Regional Hub",
+            desc: "Co-organized regional bootcamp, hosted student teams, managed auditorium stage crowd coordination, and guided project submission criteria."
+          },
+          {
+            title: "Hacktoberfest / Git Hands-On Workshop",
+            period: "October 2024",
+            scope: "Resource Person & Coordinator",
+            desc: "Organized hands-on session teaching Git version control fundamentals, branching models, commit etiquette, and open-source contribution flows."
+          }
+        ],
+        marginalNote: {
+          tag: "LEADERSHIP NOTE",
+          category: "COORDINATION",
+          text: "Running events for hundreds of people taught me that clear communication, calm contingency planning, and respecting everyone's time are the quiet foundation of successful teamwork."
+        },
+        footnote: "[2] Event leadership credentials verified through college chapter records and official organizer commendations."
+      },
+      {
+        id: "experience-p3",
+        layoutType: "experience-community",
+        folioType: "outreach",
+        chapterNum: "06",
+        chapterTitle: "EXPERIENCE & COMMUNITY",
+        folioLabel: "FOLIO 17",
+        folioTitle: "Teaching, Outreach & Community",
+        headline: "Teaching, Student Outreach & Active Communities",
+        subtitle: "Demystifying AI for school students, contributing to developer networks, and sharing practical craft.",
+        date: "2024 — 2026",
+        flagshipOutreach: {
+          title: "AI Playground Session",
+          venue: "St. Antony's Public School, Anakkal",
+          date: "July 2026",
+          audience: "35 High School Students",
+          badge: "COMMUNITY TEACHING",
+          summary: "Conducted an interactive, hands-on workshop introducing foundational artificial intelligence concepts and accessible creative AI tools.",
+          narrative: "Designed an interactive curriculum specifically adapted for secondary school students, stepping away from opaque mathematics and focusing on intuitive demonstrations: how models process prompts, generate imagery, analyze text, and recognize patterns.",
+          keyActivities: [
+            "Demonstrated practical prompt engineering and how large models generate responses step-by-step.",
+            "Guided 35 students through hands-on playground experiments using creative and educational AI tools.",
+            "Discussed ethical AI usage, recognizing hallucinations, and using technology as a learning companion rather than a shortcut."
+          ],
+          impact: "Empowered young learners to approach AI with curiosity and critical thinking, demystifying technology into something they can explore and shape."
+        },
+        communityMemberships: [
+          {
+            name: "Women Techmakers / Women in Tech",
+            role: "Community Member & Advocate",
+            focus: "Participating in global and regional developer initiatives promoting diversity, mentorship, and visible role models in computing."
+          },
+          {
+            name: "NVIDIA Developer Community",
+            role: "Developer Community Member",
+            focus: "Engaging in discussions on accelerated computing, local CUDA inference, and edge AI deployment patterns."
+          },
+          {
+            name: "Google Cloud & Open Source Communities",
+            role: "Active Member & Study Jam Participant",
+            focus: "Ongoing participation in architecture study jams, hackathons (GenAI Exchange, Smart India Hackathon), and open-source contributions."
+          }
+        ],
+        craftOutreach: {
+          title: "Hands-on Crochet Sessions — The Knotique",
+          role: "Founder & Workshop Instructor",
+          summary: "Taught crochet basics and tactile craft techniques through small group sessions, connecting patience, spatial patterning, and mindful creativity.",
+          linkText: "Featured in Chapter 01 (Folio 03)"
+        },
+        closingReflection: {
+          title: "Connecting Technical Discipline & Human Collaboration",
+          text: "Software engineering is fundamentally a team sport. Whether building retrieval architectures, coordinating logistics for a thousand hackathon participants, or teaching high schoolers how prompts work, the connecting thread is empathy: understanding user needs, communicating with clarity, and building things that genuinely serve people."
+        },
+        marginalNote: {
+          tag: "COMMUNITY VALUES",
+          category: "OUTREACH",
+          text: "Knowledge compounds when shared freely. Explaining complex AI concepts to young students made me a much sharper, more empathetic engineer."
+        },
+        footnote: "[3] Outreach records archived under community service and verified through institutional outreach letters."
       }
     ]
   },

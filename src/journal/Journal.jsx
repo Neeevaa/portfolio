@@ -15,8 +15,6 @@ import { chaptersData, buildFolioList } from "./data/journalData";
 
 import "./journal.css";
 
-const TOTAL_SPREADS = 11; // Spread 0 (Standalone Cover) through Spread 10 (Ch.10/Colophon)
-
 /**
  * JournalBookInner
  * Core physical journal book engine:
@@ -61,6 +59,10 @@ function JournalBookInner() {
   // Build flattened folio list and chapter lookup map
   const folios = useMemo(() => buildFolioList(chaptersData), []);
   const totalFolios = folios.length;
+  const totalSpreads = useMemo(
+    () => Math.ceil((totalFolios - 1) / 2) + 1,
+    [totalFolios]
+  );
 
   const folioMap = useMemo(() => {
     const map = {};
@@ -90,7 +92,7 @@ function JournalBookInner() {
   // Navigate to target spread with 3D turning leaf
   const goToSpread = useCallback((targetSpread) => {
     if (targetSpread === spreadIndex) return;
-    if (targetSpread < 0 || targetSpread >= TOTAL_SPREADS) return;
+    if (targetSpread < 0 || targetSpread >= totalSpreads) return;
     if (flipState.isFlipping) return;
 
     const newDirection = targetSpread > spreadIndex ? "forward" : "backward";
@@ -120,7 +122,7 @@ function JournalBookInner() {
     }
 
     if (spreadScrollRef.current) spreadScrollRef.current.scrollTop = 0;
-  }, [spreadIndex, flipState.isFlipping]);
+  }, [spreadIndex, totalSpreads, flipState.isFlipping]);
 
   // Reset spread scroll to top whenever spread changes
   useEffect(() => {
@@ -136,14 +138,14 @@ function JournalBookInner() {
       return;
     }
     const targetSpread = Math.ceil(targetFolioIndex / 2);
-    goToSpread(Math.min(targetSpread, TOTAL_SPREADS - 1));
-  }, [goToSpread]);
+    goToSpread(Math.min(targetSpread, totalSpreads - 1));
+  }, [goToSpread, totalSpreads]);
 
   const handleNext = useCallback(() => {
-    if (spreadIndex < TOTAL_SPREADS - 1) {
+    if (spreadIndex < totalSpreads - 1) {
       goToSpread(spreadIndex + 1);
     }
-  }, [spreadIndex, goToSpread]);
+  }, [spreadIndex, totalSpreads, goToSpread]);
 
   const handlePrev = useCallback(() => {
     if (spreadIndex > 0) {
@@ -369,7 +371,7 @@ function JournalBookInner() {
               currentFolio={folios[0]}
               rightFolio={folios[0]}
               spreadIndex={0}
-              totalSpreads={TOTAL_SPREADS}
+              totalSpreads={totalSpreads}
               totalFolios={totalFolios}
               onOpenToc={() => setIsTocOpen(true)}
             />
@@ -411,7 +413,7 @@ function JournalBookInner() {
               currentFolio={currentLeftFolio}
               rightFolio={currentRightFolio}
               spreadIndex={spreadIndex}
-              totalSpreads={TOTAL_SPREADS}
+              totalSpreads={totalSpreads}
               totalFolios={totalFolios}
               onOpenToc={() => setIsTocOpen(true)}
             />
@@ -511,7 +513,7 @@ function JournalBookInner() {
           currentFolio={currentLeftFolio}
           rightFolio={currentRightFolio}
           spreadIndex={spreadIndex}
-          totalSpreads={TOTAL_SPREADS}
+          totalSpreads={totalSpreads}
           onPrev={handlePrev}
           onNext={handleNext}
           onSelectSpread={goToSpread}
